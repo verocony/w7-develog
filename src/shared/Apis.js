@@ -5,30 +5,30 @@ const cookies = new Cookies()
 
 const instance = axios.create({
   noheader: {
-    baseURL: "http://13.124.254:8080",
+    baseURL: "${process.env.REACT_APP_API_URL}",
     headers: {
       "content-type": "application/json;charset=UTF-8",
-      "accept": "application/json",
+      accept: "application/json",
     },
     withCredentials: true,
   },
-  header: {
-    baseURL: "http://13.124.254:8080",
+  headers: {
+    baseURL: "${process.env.REACT_APP_API_URL}",
     headers: {
       "content-type": "application/json;charset=UTF-8",
-      "accept": "application/json",
-      "Access_Token": `Bearer ${cookies.get("token")}`,
+      accept: "application/json",
+      Access_Token: `Bearer ${cookies.get("token")}`,
       "Access-Control-Allow-Origin": "*",
     },
     withCredentials: true,
   },
   file: {
-    baseURL: "http://13.124.254:8080",
+    baseURL: "${process.env.REACT_APP_API_URL}",
     headers: {
-      "enctype": "multipart/form-data",
+      enctype: "multipart/form-data",
       "content-type": "application/json;charset=UTF-8",
-      "Access_Token": `Bearer ${cookies.get("token")}`,
-      "accept": "application/json",
+      Access_Token: `Bearer ${cookies.get("token")}`,
+      accept: "application/json",
       "Access-Control-Allow-Origin": "*",
     },
     withCredentials: true,
@@ -38,36 +38,37 @@ const instance = axios.create({
 // 예시
 export const Apis = {
   //로그인
-  loginAX: (loginInfo) => instance.noheader.post(`/user/login`, loginInfo),
+  loginAX: (loginInfo) =>
+    instance.noheader.post(`/team01/member/login`, loginInfo),
   //회원가입
   signupAX: (signupInfo) =>
-  instance.post(`/team01/member/signup`, signupInfo),
+    instance.noheader.post(`/team01/member/signup`, signupInfo),
   //이메일중복확인
   usernameAX: (userid) =>
-  instance.noheader.post(`/team01/member/idCheck`, userid),
+    instance.noheader.post(`/team01/member/idCheck`, userid),
+  //게시글 작성
+  filePostAX: (postInfo) => instance.file.post(`/team01/post`, postInfo),
+  //게시글 수정
+  putPostAX: (postInfo) =>
+    instance.file.put(`/team/01/post/${postId}`, postInfo),
+  //게시글 삭제
+  deletePostAX: (id) => instance.headers.delete(`/team/01/post/${id}`),
+  //게시글 좋아요
+  likePostAX: (id) => instance.headers.get(`/team01/likes/${id}`),
+  //게시글 전체 조회
+  getPostAX: () => instance.headers.get(`/team01/getPost`),
+  //게시글 상세 조회
+  getDetailAX: () => instance.headers.get(`/team01/getPost/${postId}`),
 
-//   //게시글 작성
-//   filePostAX: (postInfo) => instance.file.post(`/team01/post`, postInfo),
-//   //게시글 수정
-//   putPostAX: (postInfo) => instance.file.put(`/team/01/post/${postId}`, postInfo),
-//   //게시글 삭제
-//   deletePostAX: (id) => instance.header.delete(`/team/01/post/${id}`),
-//   //게시글 좋아요
-//   likePostAX: (id) => instance.header.get(`/team01/likes/${id}`),
-//   //게시글 전체 조회
-//   getPostAX: () => instance.header.get(`/team01/getPost`),
-//   //게시글 상세 조회
-//   getDetailAX: () => instance.header.get(`/team01/getPost/${postId}`),
+  //댓글 작성
+  postCmtAX: (id) => instance.headers.post(`/team01/comment/${id}`),
+  //댓글 삭제
+  deleteCmtAX: (id) => instance.headers.post(`/team01/comment/${id}`),
+}
 
-//   //댓글 작성
-//   postCmtAX: (id) => instance.header.post(`/team01/comment/${id}`),
-//   //댓글 삭제
-//   deleteCmtAX: (id) => instance.header.post(`/team01/comment/${id}`),
-// }
+export default Apis
 
 //대댓글 작성부터는 이후 추가해서 사용 필요
-
-
 
 // 여기서 부터 샘플
 //   //마이페이지 계정 수정 페이지
@@ -151,5 +152,3 @@ export const Apis = {
 //       alert(err)
 //     })
 // }
-
-export default userApis
