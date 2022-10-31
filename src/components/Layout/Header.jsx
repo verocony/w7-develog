@@ -32,7 +32,7 @@ const Header = () => {
 
         <button onClick={onClickNewPost}>새 글 작성</button>
 
-        {/* 프로필 사진과 드롭다운 메뉴 */}
+        {/* 프로필 사진과 드롭다운 메뉴 - 화살표 눌러서 카테고리 나오게 하기 */}
         <div className="profile">
           <img src={data.userImg} alt="thumbnail" />
           <svg
