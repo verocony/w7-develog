@@ -147,9 +147,9 @@ const Editor = () => {
                     onChange={onChangeImage}
                     ref={imgRef}
                   />
-                  <button type="button" htmlFor="inputImg">
+                  {/* <button type="button" htmlFor="inputImg">
                     이미지 업로드
-                  </button>
+                  </button> */}
                 </div>
               </ImgBox>
             </label>
