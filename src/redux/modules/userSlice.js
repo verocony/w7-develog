@@ -1,7 +1,7 @@
 import { createSlice, current } from "@reduxjs/toolkit"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import Apis from "../../shared/Apis"
-import { setCookie, getCookie, delCookie } from "../../shared/Cookie"
+import { setCookie, getCookie, delCookie } from "../../shared/shared/Cookie"
 import { useNavigate } from "react-router-dom"
 
 export const userSignin = createAsyncThunk(

@@ -1,3 +1,4 @@
+// 민지
 import { createSlice, current } from "@reduxjs/toolkit"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"

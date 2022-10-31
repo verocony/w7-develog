@@ -1,14 +1,8 @@
 import React from "react"
-import Routers from "./routes"
+import Router from "./routes/routes"
 
-class App extends React.Component {
-  render() {
-    return (
-      <>
-        <Routers />;
-      </>
-    )
-  }
+function App() {
+  return <Router />
 }
 
 export default App

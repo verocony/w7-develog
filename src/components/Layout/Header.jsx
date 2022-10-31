@@ -1,254 +1,96 @@
-import React, { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
-// import GlobalLayout from "./GlobalLayout"
+// 민지
+import React from "react"
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-import detailHeaderLogo from "../assets/detailHeaderLogo.png"
-import { BsFillSunFill, BsSearch } from "react-icons/bs"
-import { IoMdArrowDropdown } from "react-icons/io"
-import Portal from "../UserModal/Portal"
-import Modal from "../UserModal/Modal"
-import { useDispatch } from "react-redux"
-import { logout } from "../../redux/modules/userSlice"
 
-const GlobalHeader = ({
-  userDetail,
-  userToken,
-  isLogin,
-  setIsLogIn,
-  isToggle,
-  setIsToggle,
-}) => {
-  const [modalOn, setModalOn] = useState(false)
+const Header = () => {
+  const data = useSelector((state) => state.list.list)
+  const navigate = useNavigate()
 
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    userToken === null ? setIsLogIn(false) : setIsLogIn(true)
-  }, [])
-
-  // 모달 상태 변경
-  const handleModal = () => {
-    setModalOn(!modalOn)
+  const onClickNewPost = () => {
+    navigate("/post")
   }
-
-  const onLogOut = (event) => {
-    event.stopPropagation()
-    event.preventDefault()
-    alert("로그아웃 하시겠습니까?")
-    dispatch(logout())
-    window.location.reload()
-  }
-
-  const profile = localStorage.getItem("user-profile")
-
-  console.log("detail header 로그인 여부 확인 :::", isLogin)
-
-  // ::: 유저 메뉴
-  const onClickProfileMenu = () => {
-    setIsToggle(!isToggle)
-  }
-  console.log("detail header 토글 여부 확인 :::", isToggle)
   return (
-    <StGlobalHeaderWrap>
-      {/* <GlobalLayout> */}
-      <StHeaderContentBox>
-        <h1>
-          <Link to={`/`}>
-            <img src={detailHeaderLogo} alt="logo" />
-          </Link>
-          <strong>{userDetail.account} .log</strong>
-        </h1>
-        <StHeaderRightWrap>
-          <StLightDarkBox>
-            <BsFillSunFill size="24" color="var(--title-color)" />
-          </StLightDarkBox>
-          <StSearchBox>
-            <BsSearch size="18" color="var(--title-color)" />
-          </StSearchBox>
-          {userToken === null ? (
-            <StLoginOffMenu>
-              <button className="login" onClick={handleModal}>
-                로그인
-              </button>
-              <Portal>{modalOn && <Modal onClose={handleModal} />}</Portal>
-            </StLoginOffMenu>
-          ) : (
-            <StLoginOnMenu>
-              <Link to={`/post`}>
-                <button className="buttonNewPost">새 글 작성</button>
-              </Link>
-              <StProfileBox>
-                <p onClick={onClickProfileMenu}>
-                  {/* 로그인한 유저 정보 받아와야함. 주형님 머지하고 받아올 예정 */}
-                  <img src={profile} alt="user profile image" />
-                </p>
-                <IoMdArrowDropdown />
-                <StDropDownBox isToggle={isToggle} onClick={onLogOut}>
-                  <li>로그아웃</li>
-                </StDropDownBox>
-              </StProfileBox>
-            </StLoginOnMenu>
-          )}
-        </StHeaderRightWrap>
-      </StHeaderContentBox>
-      {/* </GlobalLayout> */}
-    </StGlobalHeaderWrap>
+    <HeaderLine>
+      <Logo className="logo">develog</Logo>
+
+      <Icons>
+        {/* 라이트/다크모드 svg */}
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M4.069 13h-4.069v-2h4.069c-.041.328-.069.661-.069 1s.028.672.069 1zm3.034-7.312l-2.881-2.881-1.414 1.414 2.881 2.881c.411-.529.885-1.003 1.414-1.414zm11.209 1.414l2.881-2.881-1.414-1.414-2.881 2.881c.528.411 1.002.886 1.414 1.414zm-6.312-3.102c.339 0 .672.028 1 .069v-4.069h-2v4.069c.328-.041.661-.069 1-.069zm0 16c-.339 0-.672-.028-1-.069v4.069h2v-4.069c-.328.041-.661.069-1 .069zm7.931-9c.041.328.069.661.069 1s-.028.672-.069 1h4.069v-2h-4.069zm-3.033 7.312l2.88 2.88 1.415-1.414-2.88-2.88c-.412.528-.886 1.002-1.415 1.414zm-11.21-1.415l-2.88 2.88 1.414 1.414 2.88-2.88c-.528-.411-1.003-.885-1.414-1.414zm6.312-10.897c-3.314 0-6 2.686-6 6s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z" />
+        </svg>
+
+        {/* 검색 svg */}
+        <svg width="17" height="17" viewBox="0 0 17 17">
+          <path
+            fillRule="evenodd"
+            d="M13.66 7.36a6.3 6.3 0 1 1-12.598 0 6.3 6.3 0 0 1 12.598 0zm-1.73 5.772a7.36 7.36 0 1 1 1.201-1.201l3.636 3.635c.31.31.31.815 0 1.126l-.075.075a.796.796 0 0 1-1.126 0l-3.636-3.635z"
+            clipRule="evenodd"
+            fill="currentColor"
+          ></path>
+        </svg>
+
+        <button onClick={onClickNewPost}>새 글 작성</button>
+
+        {/* 프로필 사진과 드롭다운 메뉴 */}
+        <div className="profile">
+          {/* <img src={data.userImg} alt="thumbnail" /> */}
+          <img alt="thumbnail" />
+          <svg
+            stroke="currentColor"
+            fill="currentColor"
+            strokeWidth="0"
+            viewBox="0 0 24 24"
+            height="1em"
+            width="1em"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path d="M7 10l5 5 5-5z" />
+          </svg>
+        </div>
+      </Icons>
+    </HeaderLine>
   )
 }
 
-export default GlobalHeader
+export default Header
 
-const StGlobalHeaderWrap = styled.div`
-  width: 100%;
-  height: 4rem;
-  box-shadow: rgb(0 0 0 / 8%) 0px 0px 8px;
-`
+const HeaderLine = styled.div`
+  width: 90%;
+  max-width: 1376px;
+  height: 64px;
 
-const StHeaderContentBox = styled.div`
+  background-color: #f8f9fa;
+  color: #212529;
+  font-size: 16px;
+  text-align: start;
+  line-height: normal;
+  letter-spacing: normal;
+
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
-  height: 4rem;
 
-  h1 {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  h1 img {
-    width: 1.75rem;
-    height: 1.75rem;
-    margin-right: 1rem;
-  }
-  h1 strong {
-    font-size: 1.3125rem;
-    font-weight: 700;
-    color: var(--title-color);
-  }
+  margin: 0 auto 24px;
 `
 
-const StHeaderRightWrap = styled.div`
+const Logo = styled.div`
+  /* font-family: "Fira Mono", monospace; */
+  font-size: 18px;
+  text-align: center;
+  letter-spacing: normal;
+  color: #212529;
+  margin-left: 30px;
+`
+
+const Icons = styled.div`
+  /* background-color: aquamarine; */
   display: flex;
   flex-direction: row;
   align-items: center;
-  height: 100%;
+  justify-content: right;
 
-  .buttonNewPost {
-    margin-right: 1.25rem;
-    height: 2.2rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    font-size: 1rem;
-    border-radius: 1rem;
-    outline: none;
-    font-weight: bold;
-    word-break: keep-all;
-    border: 1px solid var(--title-color);
-    color: var(--title-color);
-    background-color: var(--subBg-color);
-    transition: all 0.125s ease-in 0s;
-    cursor: pointer;
-  }
-  .buttonNewPost:hover {
-    color: var(--bg-color);
-    background-color: var(--title-color);
-  }
-
-  .login {
-    margin-right: 1.25rem;
-    height: 2.2rem;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    font-size: 1rem;
-    border-radius: 1rem;
-    outline: none;
-    font-weight: bold;
-    word-break: keep-all;
-    border: 1px solid var(--title-color);
-    color: var(--bg-color);
-    background-color: var(--title-color);
-    transition: all 0.125s ease-in 0s;
-    cursor: pointer;
-  }
-  .login:hover {
-    color: var(--title-color);
-    background-color: var(--bg-color);
-  }
-
-  .loginOn {
-    display: flex;
-    flex-direction: row;
-  }
-`
-
-const StLoginOffMenu = styled.div`
-  /* overflow: hidden; */
-`
-const StLoginOnMenu = styled.div`
-  /* display: flex; */
-  flex-direction: row;
-  display: flex;
-`
-
-const StLightDarkBox = styled.div`
-  padding: 1px 6px;
-  margin-right: 0.25rem;
-`
-
-const StSearchBox = styled.div`
-  margin: 0 0.7rem;
-`
-
-const StProfileBox = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  p {
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    background-color: var(--bg-color);
-    object-fit: cover;
-    margin-right: 0.25rem;
-    overflow: hidden;
-  }
-  svg {
-    color: var(--subText-color);
-    font-size: 1.5rem;
-    margin-right: -0.4375rem;
-    transition: all 0.125s ease-in 0s;
-  }
-  img {
-    width: 100%;
-    height: 100%;
-  }
-`
-
-const StDropDownBox = styled.ul`
-  position: absolute;
-  background-color: var(--bg-color);
-  display: ${({ isToggle }) => (isToggle ? "block" : "none")};
-  top: 47px;
-  right: 0;
-  width: 120px;
-  padding: 0 0.5rem;
-  transition: 0.5ms;
-  box-shadow: rgb(0 0 0 / 8%) 0px 0px 8px;
-  overflow: hidden;
-
-  li {
-    width: 100%;
-    height: 40px;
-    text-align: center;
-    line-height: 40px;
-    font-weight: 700;
-    color: var(--title-color);
-    border-top: 1px solid var(--subGray-color);
-  }
-  li:first-child {
-    border-top: 0px;
-  }
+  gap: 15px;
 `
