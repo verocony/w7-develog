@@ -12,7 +12,6 @@ const Header = () => {
   };
   return (
     <div>
-      {/* 폰트로 로고 적용 예정 */}
       <div className="logo">develog</div>
 
       <div>
