@@ -35,7 +35,8 @@ const Header = () => {
 
         {/* 프로필 사진과 드롭다운 메뉴 */}
         <div className="profile">
-          <img src={data.userImg} alt="thumbnail" />
+          {/* <img src={data.userImg} alt="thumbnail" /> */}
+          <img alt="thumbnail" />
           <svg
             stroke="currentColor"
             fill="currentColor"

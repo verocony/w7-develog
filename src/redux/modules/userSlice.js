@@ -1,7 +1,7 @@
 import { createSlice, current } from "@reduxjs/toolkit"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
-import { setCookie } from "../../Cookie"
+import { setCookie } from "../../shared/Cookie"
 
 const initialState = {
   user: [],
