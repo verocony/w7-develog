@@ -1,46 +1,72 @@
 import axios from "axios"
 import { Cookies } from "react-cookie"
+import {useParams} from 'react-router-dom';
+import { getCookie } from "./Cookie";
 
 const cookies = new Cookies()
+const postId = useParams.postId;
 
-const instance = axios.create({
-  baseURL: "https://starback.shop/",
+const noToken = axios.create({
+  baseURL: "process.env.REACT_APP_API_URL",
   headers: {
     "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
-    Authorization: `Bearer ${cookies.get("token")}`,
+  },
+  withCredentials: true,
+})
+
+const token = axios.create({
+  baseURL: "process.env.REACT_APP_API_URL",
+  headers: {
+    "content-type": "application/json;charset=UTF-8",
+    accept: "application/json",
+    // Access_Token: `Bearer ${cookies.get("token")}`,
+    Access_Token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3lmaXZlIiwiZXhwIjoxNjY3MjMxNDQ0LCJpYXQiOjE2NjcyMjk2NDR9.k_2WXPZLA7m8Rb5QQxnpREL-NLobCaXm06ME0LDbGZE',
     "Access-Control-Allow-Origin": "*",
   },
   withCredentials: true,
 })
 
-// 예시
-export const apis = {
-  //로그인
-  loginAX: (loginInfo) => instance.post(`/user/login`, loginInfo),
-  //회원가입
-  signupAX: (signupInfo) => instance.post(`/team01/member/signup`, signupInfo),
-  //이메일중복확인
-  usernameAX: (userid) => instance.post(`/team01/member/idCheck`, userid),
+const file = axios.create({
+  baseURL: process.env.REACT_APP_URL,
+  headers: {
+    enctype: "multipart/form-data",
+    // Access_Token: `Bearer ${cookies.get("token")}`,
+    Access_Token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3lmaXZlIiwiZXhwIjoxNjY3MjMxNDQ0LCJpYXQiOjE2NjcyMjk2NDR9.k_2WXPZLA7m8Rb5QQxnpREL-NLobCaXm06ME0LDbGZE',
+  },
+  withCredentials: true,
+})
 
-  //게시글 작성
-  postPostAX: (postInfo) => instance.post(`/team01/post`, postInfo),
-  //게시글 수정
-  putPostAX: (postInfo) => instance.put(`/team/01/post/${postId}`, postInfo),
+// 예시
+export const Apis = {
+  // 로그인
+  loginAX: (loginInfo) => noToken.post(`/team01/member/login`, loginInfo),
+  //회원가입
+  // signupAX: (signupInfo) =>
+  //   instance.nh.post(`/team01/member/signup`, signupInfo),
+  //이메일중복확인
+  usernameAX: (userid) => noToken.post(`/team01/member/idCheck`, userid),
+  // 게시글 작성
+  filePostAX: (payload) => file.post(`/team01/post`, payload),
+  // //게시글 수정
+  putPostAX: (postInfo) =>
+    file.put(`/team/01/post/${postInfo.postId}`, postInfo),
   //게시글 삭제
-  deletePostAX: (id) => instance.delete(`/team/01/post/${id}`),
+  deletePostAX: (id) => token.delete(`/team/01/post/${id}`),
   //게시글 좋아요
-  likePostAX: (id) => instance.get(`/team01/likes/${id}`),
+  likePostAX: (id) => token.get(`/team01/likes/${id}`),
   //게시글 전체 조회
-  getPostAX: () => instance.get(`/team01/getPost`),
+  getPostAX: () => token.get(`/team01/getPost`),
   //게시글 상세 조회
-  getDetailAX: () => instance.get(`/team01/getPost/${postId}`),
+  getDetailAX: (postId) => token.get(`/team01/getPost/${postId}`),
 
   //댓글 작성
-  postCmtAX: (id) => instance.post(`/team01/comment/${id}`),
+  postCmtAX: (id) => token.post(`/team01/comment/${id}`),
   //댓글 삭제
-  deleteCmtAX: (id) => instance.post(`/team01/comment/${id}`),
+  deleteCmtAX: (id) => token.post(`/team01/comment/${id}`),
 }
+
+export default Apis
 
 //대댓글 작성부터는 이후 추가해서 사용 필요
 
@@ -125,3 +151,4 @@ export const apis = {
 //       alert(err)
 //     })
 // }
+
