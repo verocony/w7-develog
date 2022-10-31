@@ -3,45 +3,76 @@ import { Cookies } from "react-cookie"
 
 const cookies = new Cookies()
 
-const instance = axios.create({
-  baseURL: "https://starback.shop/",
+const noToken = axios.create({
+  // 추후에 로컬에서 서버 주소로 변경해야 함
+  baseURL: process.env.REACT_APP_URL,
   headers: {
-    "content-type": "application/json;charset=UTF-8",
+    // "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
-    Authorization: `Bearer ${cookies.get("token")}`,
-    "Access-Control-Allow-Origin": "*",
   },
   withCredentials: true,
 })
 
+
+const token = axios.create({
+  // 추후에 로컬에서 서버 주소로 변경해야 함
+  baseURL: process.env.REACT_APP_URL,
+    headers: {
+    "content-type": "application/json;charset=UTF-8",
+    accept: "application/json",
+    // Access_Token: `Bearer ${cookies.get("token")}`,
+    Access_Token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3lmaXZlIiwiZXhwIjoxNjY3MjMxNDQ0LCJpYXQiOjE2NjcyMjk2NDR9.k_2WXPZLA7m8Rb5QQxnpREL-NLobCaXm06ME0LDbGZE",
+    "Access-Control-Allow-Origin": '*',
+    },
+    withCredentials: true,
+})
+
+
+const file = axios.create({
+  // 추후에 로컬에서 서버 주소로 변경해야 함
+  baseURL: process.env.REACT_APP_URL,
+    headers: {
+    "content-type": "application/json;charset=UTF-8",
+    accept: "application/json",
+    // Access_Token: `Bearer ${cookies.get("token")}`,
+    Access_Token: "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3lmaXZlIiwiZXhwIjoxNjY3MjMxNDQ0LCJpYXQiOjE2NjcyMjk2NDR9.k_2WXPZLA7m8Rb5QQxnpREL-NLobCaXm06ME0LDbGZE",
+    "Access-Control-Allow-Origin": '*',
+    },
+  withCredentials: true,
+})
+
+
 // 예시
 export const apis = {
   //로그인
-  loginAX: (loginInfo) => instance.post(`/user/login`, loginInfo),
+  loginAX: (loginInfo) => noToken.post(`/user/login`, loginInfo),
   //회원가입
-  signupAX: (signupInfo) => instance.post(`/team01/member/signup`, signupInfo),
+  signupAX: (signupInfo) => noToken.post(`/team01/member/signup`, signupInfo),
   //이메일중복확인
-  usernameAX: (userid) => instance.post(`/team01/member/idCheck`, userid),
+  usernameAX: (userid) => noToken.post(`/team01/member/idCheck`, userid),
 
   //게시글 작성
-  postPostAX: (postInfo) => instance.post(`/team01/post`, postInfo),
+  postPostAX: (postInfo) => file.post(`/team01/post`, postInfo),
   //게시글 수정
-  putPostAX: (postInfo) => instance.put(`/team/01/post/${postId}`, postInfo),
+  putPostAX: (postId, postInfo) => token.put(`/team/01/post/${postId}`, postInfo),
   //게시글 삭제
-  deletePostAX: (id) => instance.delete(`/team/01/post/${id}`),
+  deletePostAX: (postId) => token.delete(`/team/01/post/${postId}`),
   //게시글 좋아요
-  likePostAX: (id) => instance.get(`/team01/likes/${id}`),
+  likePostAX: (postId) => token.get(`/team01/likes/${postId}`),
   //게시글 전체 조회
-  getPostAX: () => instance.get(`/team01/getPost`),
+  getPostAX: () => noToken.get(`/team01/getAllPost`),
   //게시글 상세 조회
-  getDetailAX: () => instance.get(`/team01/getPost/${postId}`),
+  getDetailAX: (postId) => noToken.get(`/team01/getPost/${postId}`),
 
   //댓글 작성
-  postCmtAX: (id) => instance.post(`/team01/comment/${id}`),
+  postCmtAX: (commentId) => token.post(`/team01/comment/${commentId}`),
   //댓글 삭제
-  deleteCmtAX: (id) => instance.post(`/team01/comment/${id}`),
+  deleteCmtAX: (commentId) => token.post(`/team01/comment/${commentId}`),
 }
 
+export default apis;
+
+// 여기서부터 샘플 예시용 
 //대댓글 작성부터는 이후 추가해서 사용 필요
 
 //   //마이페이지 계정 수정 페이지

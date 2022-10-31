@@ -1,16 +1,16 @@
 import React, { useState } from "react";
+import PostList from "../../components/features/PostList";
+import Header from "../../components/Layout/Header";
+import Footer from "../../components/Layout/Footer";
 
-export default ({ props, getNewState }) => {
-  const [data, setData] = useState([""]);
+const HomePage = () => {
   return (
-    <>
-      <p>{props}</p>
-      <input
-        onChange={e => {
-          return setData(e.target.value);
-        }}
-      ></input>
-      <button onClick={() => getNewState(data)}>Action Dispatch Button</button>
-    </>
+    <div>
+      <Header />
+      <PostList />
+      <Footer />
+    </div>
   );
 };
+
+export default HomePage;
