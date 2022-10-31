@@ -3,7 +3,7 @@ import { Cookies } from "react-cookie"
 
 // 인스턴스 3개 나누기 가능
 const cookies = new Cookies()
-const notoken = axios.create({
+const noToken = axios.create({
   baseURL: "process.env.REACT_APP_API_URL",
   headers: {
     "content-type": "application/json;charset=UTF-8",
@@ -69,12 +69,12 @@ const file = axios.create({
 // 예시
 export const Apis = {
   //로그인
-  // loginAX: (loginInfo) => notoken.post(`/team01/member/login`, loginInfo),
+  // loginAX: (loginInfo) => noToken.post(`/team01/member/login`, loginInfo),
   // //회원가입
   // signupAX: (signupInfo) =>
   //   instance.nh.post(`/team01/member/signup`, signupInfo),
   // //이메일중복확인
-  // usernameAX: (userid) => notoken.post(`/team01/member/idCheck`, userid),
+  // usernameAX: (userid) => noToken.post(`/team01/member/idCheck`, userid),
   //게시글 작성
   filePostAX: (payload) => file.post(`/team01/post`, payload),
   // //게시글 수정
