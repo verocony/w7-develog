@@ -5,6 +5,8 @@ import list from "../modules/listSlice"
 import cmt from "../modules/cmtSlice"
 import posts from "../modules/postSilice2"
 
+// ksjf
+
 const store = configureStore({
   reducer: {
     user,
