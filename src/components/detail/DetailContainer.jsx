@@ -12,14 +12,29 @@ const DetailContainer = ({ postDetail, userDetail}) => {
     const postId = useParams().postId;
 
 // 날짜 변환 필요  ** 다시
+const dateArrayToString = String(postDetail.createdAt);
+  const year = dateArrayToString.substring(0, 4);
+  const month = dateArrayToString.substring(5, 6);
+  const day = dateArrayToString.substring(7, 9);
+
+  const dateFormat = `${year}년 ${month}월 ${day}일`;
+
 
 
 // 게시글 삭제
-const onClickDeletePost = () => {
-    dispatch(__deletePost(postId));
-    navigate(`/`);
-  }
+// const onClickDeletePost = () => {
+//     dispatch(__deletePost(postId));
+//     navigate(`/`);
+//   }
 
+const onClickDeletePost = () => {
+  const result = window.alert("정말로 삭제하시겠습니까?");
+
+  if(result) {
+    dispatch(__deletePost(postId));
+    navigate('/')
+  }
+};
 
   return (
     <DetailContainerWrap>
@@ -28,7 +43,7 @@ const onClickDeletePost = () => {
 
           <DetailBox>
             <p className='postInfo'>
-              <strong>{userDetail.username}</strong> 
+              {/* <strong>{userDetail.username}</strong>  */}
               <b>&#183;</b>
               {/* <span>{dateFormat}</span> */}
             </p>

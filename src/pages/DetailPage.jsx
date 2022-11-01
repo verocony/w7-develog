@@ -7,12 +7,15 @@ import {
 import { getCookie } from '../shared/Cookie';
 import DetailContainer from '../components/detail/DetailContainer';
 import styled from 'styled-components';
+import CommentContainer from '../components/detail/CommentContainer';
+import commentsList from '../components/detail/CommentContainer'
+import CommentList from '../components/detail/CommentList';
 
 
 const DetailPage = () => {
 
-    // const [isLogin, setIsLogIn] = useState();
-    // const [isToggle, setIsToggle] = useState(false);
+    const [isLogin, setIsLogIn] = useState();
+    const [isToggle, setIsToggle] = useState(false);
   
     const dispatch = useDispatch();
     const postDetail = useSelector((state) => state.postSlice.postDetail);
@@ -31,27 +34,27 @@ const DetailPage = () => {
     }, [dispatch, postId]);
   
     console.log(postId);
-    // console.log("postDetail : ", postDetail);
+    console.log("postDetail : ", postDetail);
     console.log("Token : ", Token);
 
     return (
       <DetailPageWrap>
         {/* user id header에 보내야함 */}
         <Header 
-        //   userDetail={userDetail}
+          userDetail={userDetail}
           Token={Token}
-          // isLogin={isLogin}
-          // setIsLogIn={setIsLogIn}
-          // isToggle={isToggle}
-          // setIsToggle={setIsToggle}
+          isLogin={isLogin}
+          setIsLogIn={setIsLogIn}
+          isToggle={isToggle}
+          setIsToggle={setIsToggle}
         />
         <Layout>
           <DetailContainer 
-            // postDetail={postDetail} 
-            // userDetail={userDetail}
+            postDetail={postDetail} 
+            userDetail={userDetail}
           />
-          {/* <UserContainer userDetail={userDetail} /> */}
-          {/* <CommentContainer commentsList={commentsList} /> */}
+          <UserContainer userDetail={userDetail} />
+          <CommentContainer commentsList={commentsList} />
         </Layout>
       </DetailPageWrap>
     );
@@ -74,7 +77,7 @@ const DetailPage = () => {
     
   `;
 
-//   const UserContainer = styled.div`
+  const UserContainer = styled.div`
     
-//   `;
-  
+  `;
+ 

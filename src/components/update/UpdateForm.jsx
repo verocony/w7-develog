@@ -7,12 +7,13 @@ import {useNavigate, useParams} from 'react-router-dom';
 import instance from "../../shared/Apis";
 import styled from "styled-components";
 import { getCookie } from "../../shared/Cookie";
+import Button from "../elements/Button";
 
 const UpdateForm = () => {
 
     const dispatch = useDispatch();
     const postId = useParams().postId;
-    const postDetail = useSelector((state) => state.post.postDetail);
+    const postDetail = useSelector((state) => state.postSlice.postDetail);
 
     useEffect(() => {
         dispatch(__getPostDetail(postId));
@@ -30,6 +31,7 @@ const UpdateForm = () => {
     const [postInput, setPostInput] = useState({
         title:"",
         content:"",
+        // postContent:"",
     });
 
     const [tagList, setTagList] = useState(postDetail.tags);
@@ -53,7 +55,7 @@ const UpdateForm = () => {
                 },{
                 headers: {
                     // Access_Token: `Bearer ${getCookie("token")}`
-                    Access_Token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhc2RmIiwiZXhwIjoxNjY3MjI4MzM0LCJpYXQiOjE2NjcyMjY1MzR9.e8FVO1tWcuPslR2epg21fBDl_y4hrmNQ9GbljmjM3nw',
+                    Access_Token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMTIzIiwiZXhwIjoxNjY3MzA2OTUxLCJpYXQiOjE2NjczMDUxNTF9.zACVr8rx3qMCCfagzc_paxgDFEACsxhGpzxVoUOmrCU',
                   }
 }
                 );
@@ -62,6 +64,58 @@ const UpdateForm = () => {
             } catch(error) {
                 console.log(error);
             }
+// const onClickUpdatePost = async(event) => {
+//     const formData = new FormData()
+//     event.preventDerault();
+//     if (imgFile === "") {
+//         FormData.append("file", null)
+//     } else {
+//         FormData.append("file", imgFile)
+//     }
+
+   
+
+
+// }
+            //게시글 UPDATE
+// const modifyPostDB = (postId = null, post = {}) => {
+//     const Token = getCookie('Access_Token');
+  
+//     const _post = {
+//       ...initialPost,
+//       contents: post.contents,
+//       imageUrl: post.file,
+//     };
+  
+//     return async function (dispatch, getState, { history }) {
+//       const form = new FormData();
+//       form.append("file", post.file);
+//       form.append(
+//         "requestDto",
+//         new Blob([JSON.stringify({ contents: post.contents })], {
+//           type: "application/json",
+//         })
+//       );
+  
+//       await axios({
+//         method: "put",
+//         url: `http://13.124.136.171/api/posts/modify/${postId}`,
+//         data: form,
+//         headers: {
+//           "Content-Type": "multipart/form-data",
+//           Authorization: `${token}`,
+//         },
+//       })
+//         .then((response) => {
+//           console.log(response, "게시글 수정 성공");
+//           dispatch(editPost(_post));
+//           history.replace("/postList");
+//         })
+//         .catch((err) => {
+//           console.log(err, "수정 실패");
+//         });
+//     };
+//   };
 
             // 초기화
             setTagList([]);
@@ -101,8 +155,8 @@ const UpdateForm = () => {
                 </UpdateTags>
                 </UpdateTagWrap>
                 <UpdateBtns>
-                    <button className="buttonWhite" onClick={goBack} >취소</button>
-                    <button className="buttonPoint" onClick={onClickUpdatePost} >수정하기</button>
+                    <Button  onClick={goBack} >취소</Button>
+                    <Button  onClick={onClickUpdatePost} >수정하기</Button>
 
                 </UpdateBtns>
                 

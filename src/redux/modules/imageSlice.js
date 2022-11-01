@@ -1,7 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 
 import produce from "immer";
-import instance from "../../shared/Apis";
+import Apis from "../../shared/Apis";
 
 const SET_PREVIEW = "SET_PREVIEW";
 

@@ -1,21 +1,24 @@
-import { configureStore } from "@reduxjs/toolkit"
-import user from "../modules/userSlice"
-import post from "../modules/postSlice"
-import list from "../modules/listSlice"
-import cmt from "../modules/cmtSlice"
-import image from "../modules/imageSlice"
+import { combineReducers, configureStore } from '@reduxjs/toolkit';
+import thunk from 'redux-thunk';
+// import user from './modules/userSlice';
 
+import cmtSlice from '../modules/cmtSlice';
+import postSlice from '../modules/postSlice';
 
+const middlewares = [thunk];
+
+// 리듀서 통합
+const rootReducer = combineReducers({
+  // user,
+  // post,
+  postSlice,
+  cmtSlice,
+});
+
+// 스토어 연결
 const store = configureStore({
-  reducer: {
-    // home,
-    post,
-    image,
-    // account,
-    // cmts,
-  },
-  //배포 모드일때 리덕스 데브툴 사용 안함
-  devTools: process.env.REACT_APP_MOD !== "production",
-})
+  reducer: rootReducer,
+  middleware: [thunk],
+});
 
-export default store
+export default store;

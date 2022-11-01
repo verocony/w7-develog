@@ -7,32 +7,34 @@ const cookies = new Cookies()
 const postId = useParams.postId;
 
 const noToken = axios.create({
-  baseURL: "process.env.REACT_APP_API_URL",
+  // baseURL: process.env.REACT_APP_URL,
+  baseURL: "http:13.125.137.86",
   headers: {
-    "content-type": "application/json;charset=UTF-8",
+    // "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
   },
   withCredentials: true,
 })
 
 const token = axios.create({
-  baseURL: "process.env.REACT_APP_API_URL",
+  // baseURL: process.env.REACT_APP_URL,
+  baseURL: "http:13.125.137.86",
   headers: {
-    "content-type": "application/json;charset=UTF-8",
+    // "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
     // Access_Token: `Bearer ${cookies.get("token")}`,
-    Access_Token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3lmaXZlIiwiZXhwIjoxNjY3MjMxNDQ0LCJpYXQiOjE2NjcyMjk2NDR9.k_2WXPZLA7m8Rb5QQxnpREL-NLobCaXm06ME0LDbGZE',
+    Access_Token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMTIzIiwiZXhwIjoxNjY3MzA2OTUxLCJpYXQiOjE2NjczMDUxNTF9.zACVr8rx3qMCCfagzc_paxgDFEACsxhGpzxVoUOmrCU',
     "Access-Control-Allow-Origin": "*",
   },
   withCredentials: true,
 })
 
 const file = axios.create({
-  baseURL: process.env.REACT_APP_URL,
+  baseURL: "http:13.125.137.86",
   headers: {
     enctype: "multipart/form-data",
     // Access_Token: `Bearer ${cookies.get("token")}`,
-    Access_Token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3lmaXZlIiwiZXhwIjoxNjY3MjMxNDQ0LCJpYXQiOjE2NjcyMjk2NDR9.k_2WXPZLA7m8Rb5QQxnpREL-NLobCaXm06ME0LDbGZE',
+    Access_Token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMTIzIiwiZXhwIjoxNjY3MzA2OTUxLCJpYXQiOjE2NjczMDUxNTF9.zACVr8rx3qMCCfagzc_paxgDFEACsxhGpzxVoUOmrCU',
   },
   withCredentials: true,
 })
