@@ -3,7 +3,10 @@ import React from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
+<<<<<<< HEAD
 import { getCookie } from "../../shared/Cookie"
+=======
+>>>>>>> d9617478aa6a27b17a68aa09cc7122d1cb59cecc
 
 const Header = () => {
   const data = useSelector((state) => state.list.list)

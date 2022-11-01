@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addPost } from "../redux/modules/postSlice2"
+
 import useInput from "../hooks/useInput"
 import styled from "styled-components"
 import { useNavigate } from "react-router-dom"
@@ -91,6 +92,7 @@ const Editor = () => {
       tag: ["tag"],
     }
     //console.log(JSON.stringify(obj))
+
     formData.append("contents", JSON.stringify(obj))
     dispatch(addPost(formData))
   }
