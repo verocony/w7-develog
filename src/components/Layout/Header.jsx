@@ -1,16 +1,17 @@
 // 민지
-import React from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import React from "react"
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import styled from "styled-components"
+import { getCookie } from "../../shared/Cookie"
 
 const Header = () => {
-  const data = useSelector((state) => state.list.list);
-  const navigate = useNavigate();
+  const data = useSelector((state) => state.list.list)
+  const navigate = useNavigate()
 
   const onClickNewPost = () => {
-    navigate("/post");
-  };
+    navigate("/post")
+  }
   return (
     <HeaderLine>
       <Logo className="logo">develog</Logo>
@@ -35,8 +36,9 @@ const Header = () => {
 
         {/* 프로필 사진과 드롭다운 메뉴 */}
         <div className="profile">
+          <button onClick={() => navigate("/login")}>로그인</button>
           {/* <img src={data.userImg} alt="thumbnail" /> */}
-          <img alt="thumbnail" />
+          <img alt="thumbnail" src={`${getCookie("userImg")}`} />
           <svg
             stroke="currentColor"
             fill="currentColor"
@@ -51,10 +53,10 @@ const Header = () => {
         </div>
       </Icons>
     </HeaderLine>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
 
 const HeaderLine = styled.div`
   width: 90%;
@@ -74,7 +76,7 @@ const HeaderLine = styled.div`
   justify-content: space-between;
 
   margin: 0 auto 24px;
-`;
+`
 
 const Logo = styled.div`
   /* font-family: "Fira Mono", monospace; */
@@ -83,7 +85,7 @@ const Logo = styled.div`
   letter-spacing: normal;
   color: #212529;
   margin-left: 30px;
-`;
+`
 
 const Icons = styled.div`
   /* background-color: aquamarine; */
@@ -93,4 +95,4 @@ const Icons = styled.div`
   justify-content: right;
 
   gap: 15px;
-`;
+`

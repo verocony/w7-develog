@@ -1,34 +1,34 @@
 // 첫 화면에 나오는 포스트 카드 리스트
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { __getList } from "../../redux/modules/listSlice";
-import styled from "styled-components";
-import PostItem from "./PostItem";
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import styled from "styled-components"
+import { __getList } from "../../redux/modules/listSlice"
+import PostItem from "./PostItem"
 
 const PostList = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
   // 배열 안에 객체
-  const posts = useSelector((store) => store.list.list);
+  const posts = useSelector((store) => store.list.list)
   // const posts = useSelector((state) => state.list.list);
-  console.log("store.list", posts);
+  console.log("store.list", posts)
 
   const onChangeDate = (event) => {
-    const value = event.target;
-    document.getElementById("time").innerText = value;
-  };
+    const value = event.target
+    document.getElementById("time").innerText = value
+  }
   // 선택한 기간(오늘, 이번주, 이번달, 올해)의 게시글이 좋아요가 많은 순서대로 붙이기
   const onClickTrending = (event) => {
-    event.preventDefault();
-    const period = posts.countDay;
-    const value = event.value;
-    document.getElementById("time").innerText = value;
+    event.preventDefault()
+    const period = posts.countDay
+    const value = event.value
+    document.getElementById("time").innerText = value
     if (period === value) {
     }
-  };
-
+  }
+  console.log("props", props)
   useEffect(() => {
-    dispatch(__getList());
-  }, [dispatch]);
+    dispatch(__getList())
+  }, [dispatch])
   return (
     <>
       <div>
@@ -106,15 +106,15 @@ const PostList = () => {
         <div className="post-container">
           {posts.map((post) => {
             if (post.length !== 0)
-              return <PostItem key={post.postId} post={post} />;
+              return <PostItem key={post.postId} post={post} />
           })}
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default PostList;
+export default PostList
 
 const ListMenu = styled.div`
   width: 95%;
@@ -135,4 +135,4 @@ const ListMenu = styled.div`
   margin: auto;
   padding-left: 30px;
   gap: 12px;
-`;
+`
