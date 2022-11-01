@@ -1,16 +1,16 @@
 // 민지
-import React from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import React from "react"
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import styled from "styled-components"
 
 const Header = () => {
-  const data = useSelector((state) => state.list.list);
-  const navigate = useNavigate();
+  const data = useSelector((state) => state.list.list)
+  const navigate = useNavigate()
 
   const onClickNewPost = () => {
-    navigate("/post");
-  };
+    navigate("/post")
+  }
   return (
     <HeaderLine>
       <Logo className="logo">develog</Logo>
@@ -51,10 +51,10 @@ const Header = () => {
         </div>
       </Icons>
     </HeaderLine>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
 
 const HeaderLine = styled.div`
   width: 90%;
@@ -74,7 +74,7 @@ const HeaderLine = styled.div`
   justify-content: space-between;
 
   margin: 0 auto 24px;
-`;
+`
 
 const Logo = styled.div`
   /* font-family: "Fira Mono", monospace; */
@@ -83,7 +83,7 @@ const Logo = styled.div`
   letter-spacing: normal;
   color: #212529;
   margin-left: 30px;
-`;
+`
 
 const Icons = styled.div`
   /* background-color: aquamarine; */
@@ -93,4 +93,4 @@ const Icons = styled.div`
   justify-content: right;
 
   gap: 15px;
-`;
+`
