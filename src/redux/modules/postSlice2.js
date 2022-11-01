@@ -6,15 +6,19 @@ import Apis from "../../shared/Apis"
 const initialState = {
   posts: [],
 }
+// const header = {
+//   "Content-Type": "application/json",
+//   Access_Token: getCookie("Access_Token"),
+// }
 
 export const addPost = createAsyncThunk(
   "contents/insert",
-  async (payload, thunkAPI) => {
-    Apis.filePostAX(payload)
+  async (postInfo, thunkAPI) => {
     try {
-      console.log("PostAX response").then((response) => {
+      Apis.postFileAX(postInfo).then((response) => {
         console.log("response", response.data)
-        return thunkAPI.fulfillWithValue(payload)
+        alert(response.data.msg)
+        return thunkAPI.fulfillWithValue(postInfo)
       })
     } catch (error) {
       console.log(error)

@@ -1,7 +1,8 @@
 import { createSlice, current } from "@reduxjs/toolkit"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import Apis from "../../shared/Apis"
-import { setCookie, getCookie, delCookie } from "../../shared/shared/Cookie"
+import { setCookie, getCookie, delCookie } from "../../shared/Cookie"
+
 import { useNavigate } from "react-router-dom"
 
 export const userSignin = createAsyncThunk(
@@ -74,14 +75,15 @@ export const userCheck = createAsyncThunk(
     try {
       Apis.usernameAX(payload).then((response) => {
         console.log("idCheckAX response", response)
-        return thunkAPI
-          .fulfillWithValue(payload)
 
-          .catch(response)
+        alert(response.data.msg)
+        return thunkAPI.fulfillWithValue(payload)
       })
     } catch (error) {
-      console.log("joinAX error", error)
-      alert(error.response.data.msg)
+      if (error.response.status === 400) {
+        alert(error.response.data.msg)
+      }
+
       return thunkAPI.rejectWithValue(error)
     }
     // type
@@ -147,9 +149,10 @@ export const userSlice = createSlice({
       state.modal = !state.modal
     },
     logout: (state) => {
-      localStorage.removeItem("access-token")
-      localStorage.removeItem("user-info")
-      localStorage.removeItem("user-profile")
+      delCookie("access-token")
+      delCookie("user-info")
+      delCookie("user-profile")
+
       state.loading = false
       state.userInfo = null
       state.userToken = null
@@ -158,6 +161,7 @@ export const userSlice = createSlice({
   },
 
   extraReducers: {
+    // 로그인
     [userSignin.pending]: (state) => {
       state.isLoading = true // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
     },
@@ -166,11 +170,13 @@ export const userSlice = createSlice({
       state.isSuccess = false
       state.user = action.payload //
     },
-    [userSignin.rejected]: (state, action) => {
+    [userSignin.rejected]: (state, action, error) => {
       state.isLoading = false // 에러가 발생했지만, 네트워크 요청이 끝났으니, false로 변경합니다.
       state.isSuccess = false
       state.error = action.payload // catch 된 error 객체를 state.error에 넣습니다.
     },
+
+    // 아이디 중복체크
     [userCheck.pending]: (state) => {
       state.isLoading = true // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
     },
@@ -185,6 +191,7 @@ export const userSlice = createSlice({
       state.error = action.payload // catch 된 error 객체를 state.error에 넣습니다.
     },
 
+    // 회원가입
     [userSignup.pending]: (state) => {
       state.isLoading = true // 네트워크 요청이 시작되면 로딩상태를 true로 변경합니다.
     },
