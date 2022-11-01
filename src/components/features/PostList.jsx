@@ -25,7 +25,6 @@ const PostList = () => {
     if (period === value) {
     }
   }
-  console.log("props", props)
   useEffect(() => {
     dispatch(__getList())
   }, [dispatch])
