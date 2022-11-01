@@ -49,15 +49,14 @@ const onClickDeletePost = () => {
             </p>
             <div className='postButton'>
               <span>통계</span>
-              <Link 
-                to={`/update/${postId}`} 
+              <div onClick={navigate('/update/${postId}')}
                 state={{
                   postId: postId,
                   postDetail: postDetail
                 }}
               >
                 <span>수정</span>
-              </Link>
+              </div>
               <span onClick={onClickDeletePost}>삭제</span>
             </div>
           </DetailBox>
