@@ -1,7 +1,7 @@
 import { createSlice, current } from "@reduxjs/toolkit"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
-import apis from "../../shared/Apis"
+import Apis from "../../shared/Apis"
 import { setCookie } from "../../shared/Cookie"
 
 const initialState = {
@@ -25,12 +25,13 @@ const initialState = {
   error: null,
 }
 
+// 게시글 좋아요 수
 export const __getList = createAsyncThunk(
-  "team01/getAllPost",
+  "team01/getAllPostByLike",
   async (payload, thunkAPI) => {
     try {
       // console.log("getList payload : ", payload)
-      const res = await apis.getPostAX(payload)
+      const res = await Apis.getPostLikeAX(payload)
       return thunkAPI.fulfillWithValue(res.data);
         
     } catch (error) {
@@ -38,6 +39,19 @@ export const __getList = createAsyncThunk(
     }
   }
 )
+
+// export const __getTimeList = createAsyncThunk(
+//   "team01/getAllPostByTime",
+//   async (payload, thunkAPI) => {
+//     try {
+//       // console.log("getList payload : ", payload)
+//       const res = await Apis.getPostAX(payload)
+//       return thunkAPI.fulfillWithValue(res.data);
+//     } catch (error) {
+//       return thunkAPI.rejectWithValue(error);
+//     }
+//   }
+// )
 
 export const listSlice = createSlice({
   name: "list",

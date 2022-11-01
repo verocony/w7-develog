@@ -17,18 +17,11 @@ const PostList = () => {
     document.getElementById("time").innerText = value;
   };
   // 선택한 기간(오늘, 이번주, 이번달, 올해)의 게시글이 좋아요가 많은 순서대로 붙이기
-  const onClickTrending = (event) => {
-    event.preventDefault();
-    const period = posts.countDay;
-    const value = event.value;
-    document.getElementById("time").innerText = value;
-    if (period === value) {
-    }
-  };
 
   useEffect(() => {
     dispatch(__getList());
   }, [dispatch]);
+
   return (
     <>
       <div>

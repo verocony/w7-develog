@@ -78,21 +78,29 @@ export const Apis = {
   //게시글 수정
   putPostAX: (postId) => file.put(`/team/01/post/${postId}`, postId),
   //게시글 삭제
-  deletePostAX: (id) => token.delete(`/team/01/post/${id}`),
+  deletePostAX: (postId) => token.delete(`/team/01/post/${postId}`),
   //게시글 좋아요
-  likePostAX: (id) => token.get(`/team01/likes/${id}`),
-  //게시글 전체 조회
-  getPostAX: () => token.get(`/team01/getAllPost`),
+  likePostAX: (postId) => token.get(`/team01/likes/${postId}`),
+  //게시글 전체 조회 - 좋아요순
+  getPostLikeAX: () => noToken.get(`/team01/getAllPostByLike`),
+  //게시글 전체 조회 - 시간순
+  getPostTimeAX: () => noToken.get(`/team01/getAllPostByTime`),
   //게시글 상세 조회
   getDetailAX: (postId) => token.get(`/team01/getPost/${postId}`),
 
   //댓글 작성
-  postCmtAX: (id) => token.post(`/team01/comment/${id}`),
+  postCmtAX: (commentId) => token.post(`/team01/comment/${commentId}`),
   //댓글 삭제
-  deleteCmtAX: (id) => token.post(`/team01/comment/${id}`),
+  deleteCmtAX: (commentId) => token.post(`/team01/comment/${commentId}`),
+  //마이페이지 조회
+  getMyPostAX: (userId) => token.get(`/team01/getMyPost?id=${userId}`),
+  //마이페이지 작성자 소개 수정
+  putMyPageAX: (userId) => token.put(`team01/mypage/intro`, userId),
+  //마이페이지 이미지 수정
+  putMyImgAX: (userId) => token.put(`/team01/mypage/img`, userId),
 }
 
-export default Apis
+export default Apis;
 
 //대댓글 작성부터는 이후 추가해서 사용 필요
 
