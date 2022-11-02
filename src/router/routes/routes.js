@@ -1,17 +1,28 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React from "react"
+import { Route, Routes, BrowserRouter } from "react-router-dom"
+import LikeList from "../../components/features/LikeList"
+import MyPage from "../../components/features/MyPage"
+import TimeList from "../../components/features/TimeList"
+import Login from "../../components/modal/Login"
+import Editor from "../../pages/Editor"
+import Home from "../../pages/Home"
+// import Write from "../pages/Write"
 
-import HomePage from "./HomePage";
+const Routers = () => {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/edit" element={<Editor />} />
+        <Route path="/getMyPage" element={<MyPage />} />
+        <Route path="/getAllPostByLike" element={<LikeList />} />
+        <Route path="/getAllPostByTime" element={<TimeList/>}/>
+      </Routes>
+    </BrowserRouter>
+    
+    
+  )
+}
 
-
-const Router = () => {
-    return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-            </Routes>
-        </BrowserRouter>
-    );
-};
-
-export default Router;
+export default Routers
