@@ -1,6 +1,6 @@
-import React from "react";
-import styled, { withTheme } from "styled-components";
-import { Text } from ".";
+import React from "react"
+import styled, { withTheme } from "styled-components"
+import { Text } from "./Text"
 
 const Input = (props) => {
   const {
@@ -20,7 +20,7 @@ const Input = (props) => {
     border,
     height,
     margin,
-  } = props;
+  } = props
 
   const styles = {
     width,
@@ -28,11 +28,11 @@ const Input = (props) => {
     height,
     margin,
     border,
-  };
+  }
 
   return (
     <>
-      {label && <Text margin="0px">{label}</Text>}
+      {/* {label && <Text margin="0px">{label}</Text>} */}
       <ElInput
         {...styles}
         type={type}
@@ -47,8 +47,8 @@ const Input = (props) => {
         minheight
       />
     </>
-  );
-};
+  )
+}
 
 Input.defaultProps = {
   multiLine: false,
@@ -69,7 +69,7 @@ Input.defaultProps = {
   height: "40px",
   margin: false,
   minheight: "7.125rem",
-};
+}
 const ElInput = styled.input`
   border: ${(props) => props.border};
   width: ${(props) => props.width};
@@ -81,8 +81,32 @@ const ElInput = styled.input`
   height: ${(props) => props.height};
   margin: ${(props) => props.margin};
   min-height: ${(props) => props.minheight};
-`;
-export default Input;
+`
+
+const VelInput = styled.input`
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+  font-size: 1rem;
+  font-weight: 400;
+  writing-mode: horizontal-tb !important;
+  color: #212529;
+  flex: 1 1 0%;
+  padding: 0.8rem 1rem;
+  background: white;
+  border-right: none;
+  outline: none;
+  border: 0.25px solid #c4cad0;
+  margin: 5px 0;
+  width: 275px;
+  :focus {
+    border-color: #12b886;
+  }
+  ::placeholder {
+    color: #aaa;
+    font-size: 0.8rem;
+  }
+`
+export { Input, ElInput, VelInput }
 
 //
 // ${(props) => (props.padding ? `padding: ${props.padding};` : "")}

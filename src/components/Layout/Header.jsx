@@ -1,68 +1,93 @@
 // 민지
-import React from "react"
+import React, { useState } from "react"
 import { useSelector } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
-<<<<<<< HEAD
 import { getCookie } from "../../shared/Cookie"
-=======
->>>>>>> d9617478aa6a27b17a68aa09cc7122d1cb59cecc
+import Modal from "../modal/Modal.js"
+import Portal from "../modal/Portal.js"
+import { logout } from "../../redux/modules/userSlice"
 
 const Header = () => {
   const data = useSelector((state) => state.list.list)
   const navigate = useNavigate()
 
   const onClickNewPost = () => {
-    navigate("/post")
+    navigate("/edit")
+  }
+
+  const [modalOn, setModalOn] = useState(false)
+  const handleModal = () => {
+    setModalOn(true)
+  }
+  const userId = getCookie("userId")
+  const userImg = getCookie("userImg")
+  console.log(userId, userImg)
+  const goSearch = () => {
+    navigate("/search")
   }
   return (
-    <HeaderLine>
-      <Logo className="logo">develog</Logo>
+    <>
+      <HeaderLine>
+        <Logo className="logo">develog</Logo>
 
-      <Icons>
-        {/* 라이트/다크모드 svg */}
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-          <path d="M4.069 13h-4.069v-2h4.069c-.041.328-.069.661-.069 1s.028.672.069 1zm3.034-7.312l-2.881-2.881-1.414 1.414 2.881 2.881c.411-.529.885-1.003 1.414-1.414zm11.209 1.414l2.881-2.881-1.414-1.414-2.881 2.881c.528.411 1.002.886 1.414 1.414zm-6.312-3.102c.339 0 .672.028 1 .069v-4.069h-2v4.069c.328-.041.661-.069 1-.069zm0 16c-.339 0-.672-.028-1-.069v4.069h2v-4.069c-.328.041-.661.069-1 .069zm7.931-9c.041.328.069.661.069 1s-.028.672-.069 1h4.069v-2h-4.069zm-3.033 7.312l2.88 2.88 1.415-1.414-2.88-2.88c-.412.528-.886 1.002-1.415 1.414zm-11.21-1.415l-2.88 2.88 1.414 1.414 2.88-2.88c-.528-.411-1.003-.885-1.414-1.414zm6.312-10.897c-3.314 0-6 2.686-6 6s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z" />
-        </svg>
-
-        {/* 검색 svg */}
-        <svg width="17" height="17" viewBox="0 0 17 17">
-          <path
-            fillRule="evenodd"
-            d="M13.66 7.36a6.3 6.3 0 1 1-12.598 0 6.3 6.3 0 0 1 12.598 0zm-1.73 5.772a7.36 7.36 0 1 1 1.201-1.201l3.636 3.635c.31.31.31.815 0 1.126l-.075.075a.796.796 0 0 1-1.126 0l-3.636-3.635z"
-            clipRule="evenodd"
-            fill="currentColor"
-          ></path>
-        </svg>
-
-        <button onClick={onClickNewPost}>새 글 작성</button>
-
-        {/* 프로필 사진과 드롭다운 메뉴 */}
-        <div className="profile">
-          <button onClick={() => navigate("/login")}>로그인</button>
-          {/* <img src={data.userImg} alt="thumbnail" /> */}
-          <img alt="thumbnail" src={`${getCookie("userImg")}`} />
-          <svg
-            stroke="currentColor"
-            fill="currentColor"
-            strokeWidth="0"
-            viewBox="0 0 24 24"
-            height="1em"
-            width="1em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M7 10l5 5 5-5z" />
+        <Icons>
+          {/* 라이트/다크모드 svg */}
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M4.069 13h-4.069v-2h4.069c-.041.328-.069.661-.069 1s.028.672.069 1zm3.034-7.312l-2.881-2.881-1.414 1.414 2.881 2.881c.411-.529.885-1.003 1.414-1.414zm11.209 1.414l2.881-2.881-1.414-1.414-2.881 2.881c.528.411 1.002.886 1.414 1.414zm-6.312-3.102c.339 0 .672.028 1 .069v-4.069h-2v4.069c.328-.041.661-.069 1-.069zm0 16c-.339 0-.672-.028-1-.069v4.069h2v-4.069c-.328.041-.661.069-1 .069zm7.931-9c.041.328.069.661.069 1s-.028.672-.069 1h4.069v-2h-4.069zm-3.033 7.312l2.88 2.88 1.415-1.414-2.88-2.88c-.412.528-.886 1.002-1.415 1.414zm-11.21-1.415l-2.88 2.88 1.414 1.414 2.88-2.88c-.528-.411-1.003-.885-1.414-1.414zm6.312-10.897c-3.314 0-6 2.686-6 6s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6z" />
           </svg>
-        </div>
-      </Icons>
-    </HeaderLine>
+
+          {/* 검색 svg */}
+          <div style={{ cursor: "pointer" }} onClick={goSearch}>
+            <svg width="17" height="17" viewBox="0 0 17 17">
+              <path
+                fillRule="evenodd"
+                d="M13.66 7.36a6.3 6.3 0 1 1-12.598 0 6.3 6.3 0 0 1 12.598 0zm-1.73 5.772a7.36 7.36 0 1 1 1.201-1.201l3.636 3.635c.31.31.31.815 0 1.126l-.075.075a.796.796 0 0 1-1.126 0l-3.636-3.635z"
+                clipRule="evenodd"
+                fill="currentColor"
+              ></path>
+            </svg>
+          </div>
+          <HBtn2 onClick={onClickNewPost}>새 글 작성</HBtn2>
+          {getCookie("userId") !== "undefined" &&
+          getCookie("userId") !== undefined ? (
+            <Div>
+              <HBtn onClick={logout}>
+                {/* <button id="modal-potal" onClick={() => navigate("/login")}> */}
+                로그아웃
+              </HBtn>
+              {/* 프로필 사진과 드롭다운 메뉴 */}
+              <div className="profile">
+                <img alt="thumbnail" src={userImg} />
+                <svg
+                  stroke="currentColor"
+                  fill="currentColor"
+                  strokeWidth="0"
+                  viewBox="0 0 24 24"
+                  height="1em"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M7 10l5 5 5-5z" />
+                </svg>
+              </div>
+            </Div>
+          ) : (
+            <Div>
+              <HBtn onClick={handleModal}>로그인</HBtn>
+            </Div>
+          )}
+        </Icons>
+      </HeaderLine>
+      <Portal>{modalOn && <Modal setModalOn={setModalOn} />}</Portal>
+    </>
   )
 }
 
 export default Header
 
 const HeaderLine = styled.div`
-  width: 90%;
+  width: 100%;
   max-width: 1376px;
   height: 64px;
 
@@ -96,6 +121,41 @@ const Icons = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: right;
-
+  width: 800px;
   gap: 15px;
+`
+const HBtn = styled.div`
+  text-align: center;
+  line-height: 2.3;
+  height: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1rem;
+  border-radius: 1rem;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  background: #212529;
+  color: white;
+  transition: all 0.125s ease-in 0s;
+  cursor: pointer;
+`
+const HBtn2 = styled.div`
+  line-height: 2.3;
+  height: 2rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1rem;
+  border-radius: 1rem;
+  border: 1px solid #212529;
+  outline: none;
+  font-weight: bold;
+  word-break: keep-all;
+  background: white;
+  color: #212529;
+  transition: all 0.125s ease-in 0s;
+  cursor: pointer;
+`
+const Div = styled.div`
+  display: flex;
 `

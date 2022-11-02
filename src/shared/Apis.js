@@ -17,12 +17,8 @@ const token = axios.create({
   // 추후에 로컬에서 서버 주소로 변경해야 함
   baseURL: process.env.REACT_APP_URL,
   headers: {
-    // "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
     Access_Token: `${cookies.get("Access_Token")}`,
-    // Access_Token:
-    //   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3lmaXZlIiwiZXhwIjoxNjY3MjMxNDQ0LCJpYXQiOjE2NjcyMjk2NDR9.k_2WXPZLA7m8Rb5QQxnpREL-NLobCaXm06ME0LDbGZE",
-    // "Access-Control-Allow-Origin": "*",
   },
   withCredentials: true,
 })
@@ -31,12 +27,10 @@ const file = axios.create({
   // 추후에 로컬에서 서버 주소로 변경해야 함
   baseURL: process.env.REACT_APP_URL,
   headers: {
+    enctype: "multipart/form-data",
     // "content-type": "application/json;charset=UTF-8",
     accept: "application/json",
     Access_Token: `${cookies.get("Access_Token")}`,
-    // Access_Token:
-    //   "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJqb3lmaXZlIiwiZXhwIjoxNjY3MjMxNDQ0LCJpYXQiOjE2NjcyMjk2NDR9.k_2WXPZLA7m8Rb5QQxnpREL-NLobCaXm06ME0LDbGZE",
-    // "Access-Control-Allow-Origin": "*",
   },
   withCredentials: true,
 })
@@ -51,7 +45,7 @@ export const Apis = {
   usernameAX: (userid) => noToken.post(`/team01/member/idCheck`, userid),
 
   //게시글 작성
-  postFileAX: (postInfo) => file.post(`/team01/post`, postInfo),
+  postFileAX: (payload) => file.post(`/team01/post`, payload),
   //게시글 수정
   putPostAX: (postId, postInfo) =>
     token.put(`/team/01/post/${postId}`, postInfo),
