@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <HeaderLine>
       {/* 벨로그 로고 이미지 */}
-      <img
+      <VLogo
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE3zvkHszd7nbvfZmlMKjqnZpQtqQGC3XaG3fovvPaeKYkhTdT6QtY1nQopUaYdJaiVkw&usqp=CAU"
         alt="mypage-logo"
         onClick={() => {
@@ -48,11 +48,11 @@ const Header = () => {
           ></path>
         </svg>
 
-        <button onClick={onClickNewPost}>새 글 작성</button>
+        <HeaderBtn onClick={onClickNewPost}>새 글 작성</HeaderBtn>
 
         {/* 프로필 사진과 드롭다운 메뉴 */}
         <div className="profile">
-          <img src={`${getCookie("userImg")}`} alt="thumbnail" />
+          <UserImg src={`${getCookie("userImg")}`} alt="thumbnail" />
           <svg
             stroke="currentColor"
             fill="currentColor"
@@ -71,6 +71,11 @@ const Header = () => {
 };
 
 export default Header;
+
+const VLogo = styled.img`
+  width: 24px;
+  height: 24px;
+`
 
 const HeaderLine = styled.div`
   width: 90%;
@@ -93,12 +98,17 @@ const HeaderLine = styled.div`
 `;
 
 const Logo = styled.div`
-  /* font-family: "Fira Mono", monospace; */
-  font-size: 18px;
-  text-align: center;
+  /* background-color: yellowgreen; */
+  font-family: "Fira Mono", monospace;
+  font-size: 21px;
+  font-weight: 700;
+  /* text-align: left; */
   letter-spacing: normal;
   color: #212529;
-  margin-left: 30px;
+  margin-left: -650px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Icons = styled.div`
@@ -109,4 +119,37 @@ const Icons = styled.div`
   justify-content: right;
 
   gap: 15px;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const UserImg = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+`;
+
+const HeaderBtn = styled.button`
+  background-color: #f8f9fa;
+  width: 109px;
+  height: 32px;
+
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  line-height: normal;
+  letter-spacing: normal;
+
+  color: #212529;
+  border: 3px solid #212529;
+  box-shadow: none;
+  border-radius: 16px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #212529;
+    color: #f8f9fa;
+  }
 `;

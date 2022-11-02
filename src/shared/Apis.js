@@ -61,9 +61,9 @@ export const Apis = {
   //마이페이지 조회
   getMyPageAX: (userId) => noToken.get(`/team01/getMyPage?id=${userId}`),
   //마이페이지 작성자 소개 수정
-  putMyPageAX: (payload) => token.put(`team01/mypage/intro`, payload),
+  postMyPageAX: (payload) => token.post(`team01/mypage/intro`, payload),
   //마이페이지 이미지 수정
-  putMyImgAX: (payload) => token.put(`/team01/mypage/img`, payload),
+  postMyImgAX: (payload) => token.post(`/team01/mypage/img`, payload),
 }
 
 export default Apis;

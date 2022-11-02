@@ -3,12 +3,12 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import Apis from "../../shared/Apis";
 
-export const __getMyPost = createAsyncThunk(
-  "team01/getMyPost",
+export const __getMyPage = createAsyncThunk(
+  "team01/getMyPage",
   async (userId, thunkAPI) => {
-    console.log("userId getMyPost", userId)
+    console.log("userId getMyPage", userId)
     try {
-      const res = await Apis.getMyPostAX(userId)
+      const res = await Apis.getMyPageAX(userId)
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
@@ -20,7 +20,7 @@ export const __updateIntro = createAsyncThunk(
   "team01/myPage/intro",
   async (payload, thunkAPI) => {
     try {
-      const res = await Apis.putMyPageAX(payload)
+      const res = await Apis.postMyPageAX(payload)
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error)
@@ -33,7 +33,7 @@ export const __updateImg = createAsyncThunk(
   "team01/mypage/userImg",
   async (payload, thunkAPI) => {
     try {
-      const res = await Apis.putMyImgAX(payload)
+      const res = await Apis.postMyImgAX(payload)
       return thunkAPI.fulfillWithValue(res.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error)
@@ -59,16 +59,16 @@ export const mypageSlice = createSlice({
     },
   },
   extraReducers: {
-    [__getMyPost.pending]: (state) => {
+    [__getMyPage.pending]: (state) => {
       state.isLoading = true;
     },
-    [__getMyPost.fulfilled]: (state, action) => {
+    [__getMyPage.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isSuccess = false;
       console.log("action.payload - mypage", action.payload)
       state.user = action.payload;
     },
-    [__getMyPost.rejected]: (state, action) => {
+    [__getMyPage.rejected]: (state, action) => {
       state.isLoading = false;
       state.isSuccess = false;
       state.error = action.payload;

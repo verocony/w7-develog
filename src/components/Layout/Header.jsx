@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import "./Header.css"
 import { getCookie } from "../../shared/Cookie";
 
 const Header = () => {
@@ -15,7 +16,14 @@ const Header = () => {
 
   return (
     <HeaderLine>
-      <Logo className="logo">develog</Logo>
+      <Logo
+        className="logo"
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        develog
+      </Logo>
 
       <Icons>
         {/* 라이트/다크모드 svg */}
@@ -33,7 +41,9 @@ const Header = () => {
           ></path>
         </svg>
 
-        <button onClick={onClickNewPost}>새 글 작성</button>
+        <HeaderBtn onClick={onClickNewPost} className="header-btn">
+          새 글 작성
+        </HeaderBtn>
 
         {/* 프로필 사진과 드롭다운 메뉴 */}
         <div
@@ -42,7 +52,7 @@ const Header = () => {
             navigate(`/getMyPage?id=${getCookie("userId")}`);
           }}
         >
-          <img src={`${getCookie("userImg")}`} alt="thumbnail" />
+          <UserImg src={`${getCookie("userImg")}`} alt="thumbnail" />
           <svg
             stroke="currentColor"
             fill="currentColor"
@@ -83,12 +93,17 @@ const HeaderLine = styled.div`
 `;
 
 const Logo = styled.div`
-  /* font-family: "Fira Mono", monospace; */
-  font-size: 18px;
+  font-family: "Fira Mono", monospace;
+  font-size: 25px;
+  font-weight: 600;
   text-align: center;
   letter-spacing: normal;
   color: #212529;
   margin-left: 30px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Icons = styled.div`
@@ -98,5 +113,38 @@ const Icons = styled.div`
   align-items: center;
   justify-content: right;
 
-  gap: 15px;
+  gap: 20px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
+
+const HeaderBtn = styled.button`
+  background-color: #f8f9fa;
+  width: 109px;
+  height: 32px;
+
+  font-size: 16px;
+  font-weight: 600;
+  text-align: center;
+  line-height: normal;
+  letter-spacing: normal;
+
+  color: #212529;
+  border: 3px solid #212529;
+  box-shadow: none;
+  border-radius: 16px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #212529;
+    color: #f8f9fa;
+  }
+`;
+
+const UserImg = styled.img`
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+`

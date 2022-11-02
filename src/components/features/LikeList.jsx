@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { __getLikeList } from "../../redux/modules/listSlice";
 import Content from "./Content";
+import Header from "../Layout/Header"
+import "./List.css"
 
 const LikeList = () => {
   const dispatch = useDispatch();
@@ -14,9 +17,10 @@ const LikeList = () => {
   }, [dispatch]);
 
   return (
-    <div>
-      <div className="post-nav">
-        <button
+    <Layout>
+      <Header/>
+      <PostNav className="post-nav">
+        <TrendBtn
           className="trending"
           onClick={() => {
             navigate("/getAllPostByLike");
@@ -33,9 +37,9 @@ const LikeList = () => {
           >
             <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"></path>
           </svg>
-          <span>트렌딩</span>
-        </button>
-        <button
+          <span>&nbsp;&nbsp;&nbsp;트렌딩</span>
+        </TrendBtn>
+        <LatestBtn
           className="latest"
           onClick={() => {
             navigate("/getAllPostByTime");
@@ -52,17 +56,92 @@ const LikeList = () => {
           >
             <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"></path>
           </svg>
-          <span>최신</span>
-        </button>
-      </div>
-      <div className="post-container">
+          <span>&nbsp;&nbsp;&nbsp;최신</span>
+        </LatestBtn>
+      </PostNav>
+      <Box className="post-container">
         {posts.map((post) => {
           if (post.length !== 0)
             return <Content key={post.postId} post={post} />;
         })}
-      </div>
-    </div>
+      </Box>
+    </Layout>
   );
 };
 
 export default LikeList;
+
+const Layout = styled.div`
+  background-color: #f8f9fa;
+`;
+
+const TrendBtn = styled.button`
+  /* background-color: aqua; */
+  width: 160px;
+  height: 48px;
+
+  font-size: 20px;
+  font-weight: bold;
+  text-align: start;
+  line-height: normal;
+  letter-spacing: normal;
+
+  padding-left: 30px;
+
+  color: #212529;
+  background-color: #f8f9fa;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const LatestBtn = styled.button`
+  /* background-color: aqua; */
+  width: 160px;
+  height: 48px;
+
+  font-size: 20px;
+  font-weight: bold;
+  text-align: start;
+  line-height: normal;
+  letter-spacing: normal;
+
+  padding-left: 30px;
+
+  color: #868e96;
+  background-color: #f8f9fa;
+  border: none;
+
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const PostNav = styled.div`
+  /* background-color: yellowgreen; */
+  width: 90%;
+  max-width: 1300px;
+  margin: auto;
+  padding-left: 60px;
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: left;
+`;
+
+const Box = styled.div`
+  /* background-color: red; */
+  width: 90%;
+  max-width: 1400px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+
+  margin: 20px auto 0;
+`
