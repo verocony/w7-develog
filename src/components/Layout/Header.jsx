@@ -26,7 +26,6 @@ const Header = () => {
     if (window.confirm("로그아웃 하시겠습니까?")) {
       dispatch(logout())
     } else {
-      alert("취소합니다")
     }
   }
 
