@@ -7,7 +7,6 @@ import styled from "styled-components";
 const Home = () => {
   return (
     <Layout>
-      {/* <Header /> */}
       <LikeList/>
       <Footer />
     </Layout>

@@ -16,7 +16,7 @@ const Content = ({ post }) => {
     navigate(`/getPost/${posts.postId}`);
   };
 
-  console.log("post", post.postId)
+  // console.log("post", post.postId)
 
   useEffect(() => {
     dispatch(__getLikeList());
