@@ -23,7 +23,7 @@ const LikeList = () => {
         <TrendBtn
           className="trending"
           onClick={() => {
-            navigate("/getAllPostByLike");
+            navigate("/recent");
           }}
         >
           <svg
@@ -37,7 +37,7 @@ const LikeList = () => {
           >
             <path d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"></path>
           </svg>
-          <span>&nbsp;&nbsp;&nbsp;트렌딩</span>
+          <span>&nbsp;&nbsp;트렌딩</span>
         </TrendBtn>
         <LatestBtn
           className="latest"
@@ -56,15 +56,18 @@ const LikeList = () => {
           >
             <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"></path>
           </svg>
-          <span>&nbsp;&nbsp;&nbsp;최신</span>
+          <span>&nbsp;&nbsp;최신</span>
         </LatestBtn>
       </PostNav>
-      <Box className="post-container">
-        {posts.map((post) => {
-          if (post.length !== 0)
-            return <Content key={post.postId} post={post} />;
-        })}
-      </Box>
+      <Container>
+        <Box className="post-container">
+          {posts.map((post) => {
+            if (post.length !== 0)
+              return <Content key={post.postId} post={post} />;
+          })}
+        </Box>
+      </Container>
+      
     </Layout>
   );
 };
@@ -77,20 +80,20 @@ const Layout = styled.div`
 
 const TrendBtn = styled.button`
   /* background-color: aqua; */
-  width: 160px;
+  width: 130px;
   height: 48px;
 
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
-  text-align: start;
+  text-align: center;
   line-height: normal;
   letter-spacing: normal;
-
-  padding-left: 30px;
 
   color: #212529;
   background-color: #f8f9fa;
   border: none;
+  border-bottom: 2px solid #212529;
+  margin-right: 15px;
 
   &:hover {
     cursor: pointer;
@@ -98,21 +101,20 @@ const TrendBtn = styled.button`
 `;
 
 const LatestBtn = styled.button`
-  /* background-color: aqua; */
-  width: 160px;
+  /* background-color: limegreen; */
+  width: 130px;
   height: 48px;
 
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
-  text-align: start;
+  text-align: center;
   line-height: normal;
   letter-spacing: normal;
-
-  padding-left: 30px;
 
   color: #868e96;
   background-color: #f8f9fa;
   border: none;
+  border-bottom: 2px solid #868E96;
 
   &:hover {
     cursor: pointer;
@@ -135,13 +137,20 @@ const PostNav = styled.div`
 const Box = styled.div`
   /* background-color: red; */
   width: 90%;
-  max-width: 1400px;
+  max-width: 1250px;
 
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: start;
 
   margin: 20px auto 0;
-`
+`;
+
+const Container = styled.div`
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px 20px;
+  align-items: stretch;
+`;

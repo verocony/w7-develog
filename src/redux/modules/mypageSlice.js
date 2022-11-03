@@ -42,21 +42,28 @@ export const __updateImg = createAsyncThunk(
 )
 
 const initialState = {
-  users: 
+  mylist: 
     {
-      userId: "",
-      userImg: "",
-      intro: "",
+    postId: "",
+    postImg: "",
+    postTitle: "",
+    postCount: "",
+    postTime: "",
+    modifyPost: null,
+    userImg: "",
+    userName: "",
+    countLike: 0,
+    countCmt: 0,
     },
 }
 
 export const mypageSlice = createSlice({
-  name: "user",
+  name: "mylist",
   initialState,
   reducers: {
-    clearUser: (state) => {
-      state.data.data = "";
-    },
+    // clearUser: (state) => {
+    //   state.mylist.mylist = "";
+    // },
   },
   extraReducers: {
     [__getMyPage.pending]: (state) => {
@@ -66,7 +73,7 @@ export const mypageSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = false;
       console.log("action.payload - mypage", action.payload)
-      state.user = action.payload;
+      state.mylist = action.payload;
     },
     [__getMyPage.rejected]: (state, action) => {
       state.isLoading = false;
@@ -77,11 +84,11 @@ export const mypageSlice = createSlice({
       state.isLoading = true;
     },
     [__updateIntro.fulfilled]: (state, action) => {
-      const target = state.userId.data.findIndex(
-        (user) => user.id === action.payload.id
+      const target = state.mylist.data.findIndex(
+        (data) => data.postId === action.payload.postId
       );
       state.isLoading = false;
-      state.userId.data.splice(target, 1, action.payload);
+      state.mylist.data.splice(target, 1, action.payload);
     },
     [__updateIntro.rejected]: (state, action) => {
       state.isLoading = false;
@@ -93,8 +100,8 @@ export const mypageSlice = createSlice({
       state.isLoading = true;
     },
     [__updateImg.fulfilled]: (state, action) => {
-      const target = state.userId.data.findIndex(
-        (user) => user.id === action.payload.id
+      const target = state.mylist.data.findIndex(
+        (data) => data.postImg === action.payload.postImg
       );
       state.isLoading = false;
       state.userId.data.splice(target, 1, action.payload);

@@ -49,7 +49,7 @@ const Header = () => {
         <div
           className="profile"
           onClick={() => {
-            navigate(`/getMyPage?id=${getCookie("userId")}`);
+            navigate('/mypage');
           }}
         >
           <UserImg src={`${getCookie("userImg")}`} alt="thumbnail" />

@@ -20,8 +20,8 @@ const BGColor = styled.div`
   color: #f8f9fa;
   /* color: #212529; */
 
-  width: 90%;
-  max-width: 1400px;
+  width: 95%;
+  max-width: 1440px;
   height: 70px;
 
   display: flex;

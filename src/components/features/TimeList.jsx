@@ -24,7 +24,7 @@ const TimeList = () => {
         <TrendBtn
           className="trending"
           onClick={() => {
-            navigate("/getAllPostByLike");
+            navigate("/");
           }}
         >
           <svg
@@ -82,20 +82,20 @@ const Layout = styled.div`
 
 const TrendBtn = styled.button`
   /* background-color: aqua; */
-  width: 160px;
+  width: 130px;
   height: 48px;
 
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
-  text-align: start;
+  text-align: center;
   line-height: normal;
   letter-spacing: normal;
 
-  padding-left: 30px;
-
-  color: #212529;
+  color: #868E96;
   background-color: #f8f9fa;
   border: none;
+  border-bottom: 2px solid #868E96;
+  margin-right: 15px;
 
   &:hover {
     cursor: pointer;
@@ -103,21 +103,20 @@ const TrendBtn = styled.button`
 `;
 
 const LatestBtn = styled.button`
-  /* background-color: aqua; */
-  width: 160px;
+  /* background-color: limegreen; */
+  width: 130px;
   height: 48px;
 
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
-  text-align: start;
+  text-align: center;
   line-height: normal;
   letter-spacing: normal;
 
-  padding-left: 30px;
-
-  color: #868e96;
+  color: #212529;
   background-color: #f8f9fa;
   border: none;
+  border-bottom: 2px solid #212529;
 
   &:hover {
     cursor: pointer;
@@ -140,13 +139,13 @@ const PostNav = styled.div`
 const Box = styled.div`
   /* background-color: red; */
   width: 90%;
-  max-width: 1400px;
+  max-width: 1250px;
 
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  justify-content: space-evenly;
+  justify-content: start;
 
-  margin: auto;
+  margin: 20px auto 0;
 `;

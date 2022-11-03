@@ -15,9 +15,8 @@ const Routers = () => {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/edit" element={<Editor />} />
-        <Route path="/getMyPage" element={<MyPage />} />
-        <Route path="/getAllPostByLike" element={<LikeList />} />
-        <Route path="/getAllPostByTime" element={<TimeList/>}/>
+        <Route path="/mypage" element={<MyPage />} />
+        <Route path="/recent" element={<TimeList/>}/>
       </Routes>
     </BrowserRouter>
     
