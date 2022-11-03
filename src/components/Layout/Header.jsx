@@ -68,8 +68,7 @@ const Header = () => {
             </svg>
           </div>
           <HBtn2 onClick={onClickNewPost}>새 글 작성</HBtn2>
-          {getCookie("userId") !== "undefined" &&
-          getCookie("userId") !== undefined ? (
+          {getCookie("Access_Token") ? (
             <Div>
               <HBtn onClick={askLogOut}>
                 {/* <button id="modal-potal" onClick={() => navigate("/login")}> */}
