@@ -95,14 +95,14 @@ const VelInput = styled.input`
   background: white;
   border-right: none;
   outline: none;
-  border: 0.25px solid #c4cad0;
+  border: 0.25px solid #adb5bd;
   margin: 5px 0;
   width: 275px;
   :focus {
     border-color: #12b886;
   }
   ::placeholder {
-    color: #aaa;
+    color: #adb5bd;
     font-size: 0.8rem;
   }
 `

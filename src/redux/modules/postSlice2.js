@@ -10,9 +10,8 @@ const initialState = {
 export const addPost = createAsyncThunk(
   "contents/insert",
   async (payload, thunkAPI) => {
-    Apis.filePostAX(payload)
     try {
-      console.log("PostAX response").then((response) => {
+      await Apis.postFileAX(payload).then((response) => {
         console.log("response", response.data)
         return thunkAPI.fulfillWithValue(payload)
       })

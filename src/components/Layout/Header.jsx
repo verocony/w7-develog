@@ -1,6 +1,6 @@
 // 민지
 import React, { useState } from "react"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import styled from "styled-components"
 import { getCookie } from "../../shared/Cookie"
@@ -11,9 +11,23 @@ import { logout } from "../../redux/modules/userSlice"
 const Header = () => {
   const data = useSelector((state) => state.list.list)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const onClickNewPost = () => {
     navigate("/edit")
+  }
+
+  const goHome = () => {
+    navigate("/")
+  }
+
+  const askLogOut = (event) => {
+    event.stopPropagation()
+    if (window.confirm("로그아웃 하시겠습니까?")) {
+      dispatch(logout())
+    } else {
+      alert("취소합니다")
+    }
   }
 
   const [modalOn, setModalOn] = useState(false)
@@ -26,10 +40,15 @@ const Header = () => {
   const goSearch = () => {
     navigate("/search")
   }
+  const goMy = () => {
+    navigate(`/mypage`)
+  }
   return (
     <>
       <HeaderLine>
-        <Logo className="logo">develog</Logo>
+        <Logo onClick={goHome} className="logo">
+          develog
+        </Logo>
 
         <Icons>
           {/* 라이트/다크모드 svg */}
@@ -38,7 +57,10 @@ const Header = () => {
           </svg>
 
           {/* 검색 svg */}
-          <div style={{ cursor: "pointer" }} onClick={goSearch}>
+          <div
+            style={{ cursor: "pointer", marginTop: "5px" }}
+            onClick={goSearch}
+          >
             <svg width="17" height="17" viewBox="0 0 17 17">
               <path
                 fillRule="evenodd"
@@ -52,13 +74,22 @@ const Header = () => {
           {getCookie("userId") !== "undefined" &&
           getCookie("userId") !== undefined ? (
             <Div>
-              <HBtn onClick={logout}>
+              <HBtn onClick={askLogOut}>
                 {/* <button id="modal-potal" onClick={() => navigate("/login")}> */}
                 로그아웃
               </HBtn>
               {/* 프로필 사진과 드롭다운 메뉴 */}
-              <div className="profile">
-                <img alt="thumbnail" src={userImg} />
+              <div onClick={goMy} className="profile">
+                <img
+                  style={{
+                    marginLeft: "15px",
+                    width: "40px",
+                    borderRadius: "20px",
+                    cursor: "pointer",
+                  }}
+                  alt="thumbnail"
+                  src={userImg}
+                />
                 <svg
                   stroke="currentColor"
                   fill="currentColor"
@@ -67,6 +98,7 @@ const Header = () => {
                   height="1em"
                   width="1em"
                   xmlns="http://www.w3.org/2000/svg"
+                  style={{ margin: "0 5px 7px 5px" }}
                 >
                   <path d="M7 10l5 5 5-5z" />
                 </svg>
@@ -88,10 +120,10 @@ export default Header
 
 const HeaderLine = styled.div`
   width: 100%;
-  max-width: 1376px;
+  max-width: 1440px;
   height: 64px;
 
-  background-color: #f8f9fa;
+  box-shadow: 0px 0px 4px #eee;
   color: #212529;
   font-size: 16px;
   text-align: start;
@@ -103,7 +135,7 @@ const HeaderLine = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  margin: 0 auto 24px;
+  margin: 0 auto;
 `
 
 const Logo = styled.div`
@@ -113,6 +145,7 @@ const Logo = styled.div`
   letter-spacing: normal;
   color: #212529;
   margin-left: 30px;
+  cursor: pointer;
 `
 
 const Icons = styled.div`
@@ -132,13 +165,15 @@ const HBtn = styled.div`
   padding-right: 1rem;
   font-size: 1rem;
   border-radius: 1rem;
-  border: none;
+  border: 1px solid #212529;
   outline: none;
   font-weight: bold;
   background: #212529;
   color: white;
   transition: all 0.125s ease-in 0s;
+  margin-top: 5px;
   cursor: pointer;
+  margin-right: 20px;
 `
 const HBtn2 = styled.div`
   line-height: 2.3;

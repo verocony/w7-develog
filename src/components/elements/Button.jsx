@@ -122,5 +122,9 @@ const VelButton = styled.button`
   word-break: keep-all;
   cursor: pointer;
   text-align: center;
+  :disabled {
+    background-color: #999;
+    cursor: default;
+  }
 `
 export { Button, VelButton }

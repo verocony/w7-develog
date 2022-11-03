@@ -124,6 +124,7 @@ export const userSlice = createSlice({
       delCookie("userId")
       delCookie("userName")
       delCookie("userImg")
+      delCookie("intro")
 
       state.loading = false
       state.userInfo = null

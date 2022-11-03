@@ -38,8 +38,7 @@ const Login = (props) => {
       pw: login.pw,
     }
 
-    dispatch(userSignin(loginInfo))
-    handleModal()
+    dispatch(userSignin(loginInfo), handleModal())
   }
 
   //아이디 중복 체크
@@ -52,14 +51,13 @@ const Login = (props) => {
   }
   //아이디 형식검사
   const userIdHandle = (event) => {
-    const userIdValidate = /([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/
+    const userIdValidate = /([?=.*?a-zA-Z])(?=.*?[0-9]).{3,11}$/
 
     return userIdValidate.test(event)
   }
   //비밀번호 형식검사
   const pwCheckHandle = (event) => {
-    const pwValidate =
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/
+    const pwValidate = /^(?=.*?[a-zA-Z])(?=.*?[0-9]).{8,20}$/
 
     return pwValidate.test(event)
   }
@@ -73,30 +71,6 @@ const Login = (props) => {
 
   //회원가입 핸들
   const onSignUpHandle = () => {
-    // if (!userIdHandle.test(join.userId)) {
-    //   return alert("아이디 양식에 맞춰주세요")
-    // }
-    // if (!pwCheckHandle.test(join.pw)) {
-    //   return alert("비밀번호 양식에 맞춰주세요")
-    // }
-    // if (join.pw !== join.pwCheck) {
-    //   return alert("비밀번호를 다시 확인해주세요")
-    // }
-    // if (
-    //   join.pw === "" ||
-    //   join.pwCheck === "" ||
-    //   join.pw === undefined ||
-    //   join.accountPwConfirm === undefined
-    // ) {
-    //   return alert("빈칸을 입력해주세요.")
-    // }
-    // if (join.userId === "" || join.userId === undefined) {
-    //   return alert("빈칸을 입력해주세요.")
-    // }
-
-    // if (join.userName === "" || join.userName === undefined) {
-    //   return alert("빈칸을 입력해주세요.")
-    // }
     const signupInfo = {
       userName: join.userName,
       userId: join.userId,
@@ -107,39 +81,6 @@ const Login = (props) => {
     dispatch(userSignup(signupInfo))
     toggleBtnHandle()
   }
-  // const formData = new FormData()
-  // if (imgFile === "") {
-  //   formData.append("file", null)
-  // } else {
-  //   formData.append("file", imgFile)
-  // }
-
-  // let obj = {
-  //   userName: join.userName,
-  //   userId: join.userId,
-  //   pw: join.pw,
-  //   pwCheck: join.pwCheck,
-  //   intro: join.intro,
-  // }
-  // //console.log(JSON.stringify(obj))
-  // formData.append("data", JSON.stringify(obj))
-  // dispatch(userSignup(formData))
-
-  // // img
-  // const [imageUrl, setImageUrl] = useState(null)
-  // const [imgFile, setImgFile] = useState("")
-  // const imgRef = useRef()
-
-  // const onChangeImage = () => {
-  //   const reader = new FileReader()
-
-  //   const userImg = imgRef.current.files[0]
-  //   reader.readAsDataURL(userImg)
-  //   reader.onloadend = () => {
-  //     setImageUrl(reader.result)
-  //     setImgFile(userImg)
-  //   }
-  // }
 
   // 토글
   const [toggle, setToggle] = useState(true)
@@ -213,7 +154,7 @@ const Login = (props) => {
                 name="userId"
                 value={join.userId || ""}
                 type="text"
-                placeholder="아이디를 입력해주세요."
+                placeholder="아이디"
               />
               {/* 중복확인 버튼 */}
               <Button
@@ -228,7 +169,7 @@ const Login = (props) => {
             </Flex>
             <Valitext textColor={"#f96854"}>
               {!userIdHandle(join.userId) && join.userId !== ""
-                ? "아이디 형식이 올바르지 않습니다."
+                ? "영문,숫자를 혼합하여 4-12글자 이내로 입력해주세요."
                 : ""}
             </Valitext>
             <VelInput
@@ -238,7 +179,7 @@ const Login = (props) => {
               name="userName"
               value={join.userName || ""}
               type="text"
-              placeholder="이름을 입력해주세요."
+              placeholder="이름"
             />
             <VelInput
               size="large"
@@ -247,11 +188,11 @@ const Login = (props) => {
               name="pw"
               value={join.pw || ""}
               type="password"
-              placeholder="비밀번호는 영문 숫자 특수문자 조합으로 8자 이상으로 입력해주세요."
+              placeholder="비밀번호"
             />
             <Valitext textColor={"#f96854"}>
               {!pwCheckHandle(join.pw) && join.pw !== ""
-                ? "비밀번호 형식이 일치하지 않습니다."
+                ? "영문,숫자를 혼합하여 8-20글자로 입력해주세요."
                 : ""}
             </Valitext>
             <VelInput
@@ -261,10 +202,12 @@ const Login = (props) => {
               name="pwCheck"
               value={join.pwCheck || ""}
               type="password"
-              placeholder="비밀번호를 다시 한 번 입력해주세요."
+              placeholder="비밀번호 확인"
             />
             <Valitext textColor={"#f96854"}>
-              {join.pw !== join.pwCheck ? "비밀번호가 일치하지 않습니다." : ""}
+              {join.pwCheck !== "" && join.pw !== join.pwCheck
+                ? "비밀번호가 일치하지 않습니다."
+                : ""}
             </Valitext>
             {/* <Valitext textColor={"#22B14C"}>
               {/* {join.accountPw !== "" && join.accountPwConfirm !== "" && join.accountPw !== join.accountPwConfirm ? "" : "비밀번호가 일치합니다."} */}

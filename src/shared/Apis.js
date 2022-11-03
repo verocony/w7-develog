@@ -57,7 +57,7 @@ export const Apis = {
   getLikePostAX: () => noToken.get(`/team01/getAllPostByLike`),
   //게시글 전체 조회(최신순)
   getTimePostAX: () => noToken.get(`/team01/getAllPostByTime`),
-  //게시글 상세 조회
+  // 게시글 상세 조회
   getDetailAX: (postId) => noToken.get(`/team01/getPost/${postId}`),
 
   //댓글 작성
