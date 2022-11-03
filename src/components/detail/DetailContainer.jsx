@@ -26,11 +26,11 @@ const DetailContainer = ({ postDetail, userDetail }) => {
 
         <DetailBox>
           <p className="postInfo">
-            {/* <strong>{userDetail.username}</strong>  */}
-            <strong>team01 &nbsp;&nbsp;</strong>
+            {/* <strong>{postDetail.username}</strong> */}
+            <strong>{postDetail.userId}</strong>
             <b>&#183;</b>
             {/* <span>{dateFormat}</span> */}
-            <span>&nbsp; 1분 전 &nbsp;&nbsp;</span>
+            <span>{postDetail.countTime}</span>
             <DetailPrivate> 비공개 </DetailPrivate>
           </p>
           <div className="postButton">
