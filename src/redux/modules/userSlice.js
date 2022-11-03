@@ -2,7 +2,6 @@ import { createSlice, current } from "@reduxjs/toolkit"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import Apis from "../../shared/Apis"
 import { setCookie, getCookie, delCookie } from "../../shared/Cookie"
-
 import { useNavigate } from "react-router-dom"
 
 export const userSignin = createAsyncThunk(
@@ -19,6 +18,7 @@ export const userSignin = createAsyncThunk(
             console.log(response.headers)
             setCookie("Access_Token", response.headers.access_token)
             setCookie("userId", response.data.data.userId)
+            setCookie("userName", response.data.data.userName)
             setCookie("userImg", response.data.data.userImgUrl)
             setCookie("intro", response.data.data.intro)
             alert(response.data.msg)
@@ -38,36 +38,6 @@ export const userSignin = createAsyncThunk(
     }
   }
 )
-
-//     try {
-//       // const data = await axios.post(
-//       //   `http://3.39.72.234:8080/api/user/login`,
-//       //   payload
-//       // )
-//       const data = await axios.post(
-//         `${process.env.REACT_APP_URL}/auth/login`,
-//         payload
-//       )
-//       const Access_Token = data.headers.access_token
-//       // const refreshToken = data.headers["refresh-token"];
-//       if (data.status === 200 || data.status === 201) {
-//         setCookie("Access_Token", Access_Token)
-//         // window.localStorage.setItem("refreshToken", refreshToken);
-//         setCookie("nickname", data.data.data)
-//         alert("환영합니다! C반의 새로운 소식을 만나볼까요?")
-//         window.location.replace("/list")
-//       }
-
-//       return thunkAPI.fulfillWithValue(payload)
-//     } catch (error) {
-//       if (400 <= error.data.status && error.data.status <= 500) {
-//         alert("로그인에 실패했습니다.")
-//         window.location.reload()
-//       }
-//       return thunkAPI.rejectWithValue(error)
-//     }
-//   }
-// )
 
 export const userCheck = createAsyncThunk(
   "user/check",
@@ -106,13 +76,14 @@ export const userCheck = createAsyncThunk(
 export const userSignup = createAsyncThunk(
   "user/userSignUp",
   async (signupInfo, thunkAPI) => {
+    const postInfo = signupInfo.postInfo
     Apis.signupAX(signupInfo)
     try {
       console
         .log("join")
         .then((response) => {
           console.log("joinAX response", response)
-
+          alert(response.data.msg)
           return thunkAPI.fulfillWithValue(response.data)
         })
         .catch()
@@ -144,14 +115,16 @@ export const userSlice = createSlice({
     modal: false,
   },
   reducers: {
-    //모달 토글
-    modalTogle(state, action) {
-      state.modal = !state.modal
-    },
+    // //모달 토글
+    // modalTogle(state, action) {
+    //   state.modal = !state.modal
+    // },
     logout: (state) => {
-      delCookie("access-token")
-      delCookie("user-info")
-      delCookie("user-profile")
+      delCookie("Access_Token")
+      delCookie("userId")
+      delCookie("userName")
+      delCookie("userImg")
+      delCookie("intro")
 
       state.loading = false
       state.userInfo = null

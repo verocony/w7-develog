@@ -8,7 +8,7 @@ import PostItem from "./PostItem"
 const SearchList = () => {
   const dispatch = useDispatch()
   // 배열 안에 객체
-  const searchs = useSelector((store) => store.search)
+  const searchs = useSelector((store) => store.search.search)
   console.log("store.search", searchs)
 
   useEffect(() => {
