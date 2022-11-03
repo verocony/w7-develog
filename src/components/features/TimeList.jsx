@@ -65,7 +65,7 @@ const TimeList = () => {
           if (post.length !== 0)
             return (
               <div>
-                <Content key={post.postId} post={post} />;
+                <Content key={post.postId} post={post} />
               </div>
             );
         })}

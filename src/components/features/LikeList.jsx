@@ -63,7 +63,7 @@ const LikeList = () => {
         <Box className="post-container">
           {posts.map((post) => {
             if (post.length !== 0)
-              return <Content key={post.postId} post={post} />;
+              return <Content key={post.postId} post={post} />
           })}
         </Box>
       </Container>
@@ -137,7 +137,7 @@ const PostNav = styled.div`
 const Box = styled.div`
   /* background-color: red; */
   width: 90%;
-  max-width: 1250px;
+  max-width: 1400px;
 
   display: flex;
   flex-direction: row;
@@ -150,7 +150,7 @@ const Box = styled.div`
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(4, 300px);
   gap: 10px 20px;
   align-items: stretch;
 `;

@@ -1,7 +1,7 @@
 # Welcome to REACT! Clone Coding _ develog |  😎
 ![]()
 
-▶️[Go to Project]()
+▶️[Go to Project](https://w7-develog.netlify.app/)
 
 ## 👉 페이지 소개
 실제 서비스 중 하나를 선택해서, 해당 서비스를 CRUD 과정을 포함하여 직접 구현
@@ -13,7 +13,7 @@
 <br>
 
 ## 👉 기술 스택
-> CSS (Styled Component) / react-icons / REACT(JS, JSX) / vercel / heroku
+> CSS (Styled Component) / REACT(JS, JSX) / Redux(@Toolkit) / vercel 
 <br>
 
 ## 👉 컴포넌트 구성 및 WF
@@ -22,47 +22,54 @@
 <summary>WireFrame</summary>
 <div markdown="1">       
   
-<!-- ![](https://velog.velcdn.com/images/joyfive/post/852555ea-04be-473e-bf84-95a3fa750c0f/image.png)
-![](https://velog.velcdn.com/images/joyfive/post/08c39916-309e-411c-8722-ae70bb46fbcf/image.png)
-![](https://velog.velcdn.com/images/joyfive/post/6f42d364-f1c4-45ee-9e9a-1e5d2cfa0a83/image.png)
-![](https://velog.velcdn.com/images/joyfive/post/67e7fb0b-bcbe-4d39-9035-83b699ecf9e4/image.png)
-![](https://velog.velcdn.com/images/joyfive/post/f4c569bb-6e47-47a8-8a04-5a8afa7b0985/image.png)
-![](https://velog.velcdn.com/images/joyfive/post/b42f073a-a910-424a-a6f9-4a10d3f878c4/image.png) -->
+![](https://bit.ly/3FGuSRt)
+![](https://bit.ly/3hbPTcw)
+![](https://bit.ly/3ftr4se)
+![](https://bit.ly/3UkQ4Rb)
+![](https://bit.ly/3fwWKwM)
+![](https://bit.ly/3UjBLfN)
+![](https://bit.ly/3U7AMQ7)
 
 </div>
 </details>
 <br>
 
 ## 👉 구현 기능
-### 1. Edit page (Create)
-- Create : axios.post 로 Mock server(json-server)에 신규 객체 추가
-- Validation : 기존 state를 활용한 방식에서 UI로 구현하는 방식으로 개선<br>
-ㄴ 버튼 클릭 시 사용자에게 누락된 인풋을 고지하는 방식에서 안내 문구가 먼저 노출된 상태에서 필드 입력 시 문구가 사라지는 방식으로 개선하여 사용성을 높이고자 함
+### 1. Sign-up / in / out (Create)
+- Create : axios.post 로 서버에 onChange값을 넘겨주면서 cross-check로 프론트도 validation 한 이후, 서버로부터 Token 전달 받아서 로그인 상태 유지
+- Validation : 정규표현식을 사용하여 자릿수, 대/소문자 혹은 특수문자등 서버와 공통적으로 결정한 방식으로 ID/PW 생성<br>
+ㄴ 정규표현식 조건을 충족하지 않을 경우, input창 아래에 해당 조건을 만족하지 않는다는 event를 노출하여 사용자에게 알림
 
-### 2. Todolist page (Read & Update & Delete)
-- Read : Edit 페이지에서 등록한 데이터들을 axios.get으로 노출하되, 객체의 IsDone 값에따라 '해야할일' 리스트와 '완료한일'리스트로 분류
-- Update : 해야할일 리스트 및 완료한일 리스트에서 각각 '완료체크' 시 완료, 취소 상태 전환(Isdone : true, false 로 객체 속성 밸류 업데이트)
-- Delete : axios.delete 로 등록되어있는 객체 데이터 삭제 기능 구현
+### 2. Posting List page (Read)
+- Read : GET방식으로 서버에서 response 전달받은 내용으로 브라우저에 렌더링하여 구현. 카테고리를 나누어, 주어진 조건에 맞도록 filtering후 map으로
+        브라우저에 컴포넌트 구현되도록 함. props를 통해 트렌드/최신 두 가지 카테고리의 리스트들은 Content.jsx를 재사용하여 각각의 리스트들을 나타나게 함.
 
 ### 3. Detail page (Read & Update) & Comments (CRUD)
-- Read : todolist ➡️ Detail 인입시 todos 객체 id 값을 파라미터로 axios.get
+- Read : Main page에서 List의 제목 혹은 사진을 클릭하면 개별 게시물 조회로 이동. POST 요청으로 onChange로 받은 값과, 이미지 파일은 form-data에 실어서
+        enctype으로 서버에 전달함.
 - Update : axios.patch로 todo.body 데이터 수정 (thunk, redux, useEffect, dispatch)
 - Comment(CRUD) : 해당 게시물의 아이디값을 키값으로 갖는 기존 todoList처럼 crud 구현
 
-### 4. Env ()
-- 개발 모드와 배포모드를 나눠 개발모드일때만 redux devtool이 보이도록 구현하고
-api의 url을 환경변수로 지정하였습니다.
+### 4. Search (Read)
+- Read : GET으로 전달받은 정보를 받아와서, 사용자가 검색창에 입력한 onChange value를 가지고, 원하는 검색결과를 필터링하여 브라우저에 렌더링
 
-### 5. Custom Hook
+### 5. My-Page (Read)
+- Read : userId로 개인의 포스팅 정보를 가져와서 본인만 접근할 수 있는 페이지에서 자신의 게시물을 관리, 개인 프로필 수정 및 관리 가능
+
+### 6. Env ()
+- 개발 모드와 배포모드를 나눠 개발모드일때만 redux devtool이 보이도록 구현하고 api의 url을 환경변수로 지정하였습니다.
+
+### 7. Custom Hook
 - useState에 onChange핸들러를 추가한 useInput훅을 만들었습니다.
+- Global Styled-component를 이용하여 컴포넌트의 재사용성을 높인 버튼 컴포넌트 활용
 
-### 6. Redux toolkit 활용 (thunkAPI)
+### 8. Redux toolkit 활용 (thunkAPI)
 - 기존 보다 코드량을 줄이고 미들웨어 개념을 통해 리듀서를 비동기 처리하는방법을 알게되었습니다.
 
-### 7. json-server & Heroku - Mock server 배포
+### 9. json-server & Heroku - Mock server 배포
 - Back-end의 API작업이 완료되지 않았을때의 상황을 가정하여 json-server를 이용하여 간단한 nosql Mock 서버 구성 및 Heroku로 서버 배포
 
-### 8. Redux devtool 비활성화 처리
+### 10. Redux devtool 비활성화 처리
 
 <br>
 

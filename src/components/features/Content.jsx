@@ -59,6 +59,9 @@ const Content = ({ post }) => {
           <PostInfo>
             <UserInfo>
               <UserImg src={post.userImg} alt="userImg" />
+              {/* <UserImg
+                src={post.userImg}
+                onerror="this.src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQFviA8Qeta_VOg3SpvXpS-xBwGLuLem-kVYpznAT18CVnMDN2-MI7bWn-bXvZWbyIoRUg&usqp=CAU';"/> */}
               <Name>
                 <By>by </By>
                 {post.userName}
