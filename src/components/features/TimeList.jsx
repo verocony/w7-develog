@@ -1,21 +1,21 @@
 // 메인 리스트 페이지에서 트렌딩 또는 최신으로 선택해서 보여주기
 
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import { __getTimeList } from "../../redux/modules/listSlice";
-import styled from "styled-components";
-import Content from "./Content";
-import Header from "../Layout/Header";
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { __getTimeList } from "../../redux/modules/listSlice"
+import styled from "styled-components"
+import Content from "./Content"
+import Header from "../Layout/Header"
 
 const TimeList = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const posts = useSelector((store) => store.list.list)
 
   useEffect(() => {
-    dispatch(__getTimeList());
-  }, [dispatch]);
+    dispatch(__getTimeList())
+  }, [dispatch])
 
   return (
     <Layout>
@@ -24,7 +24,7 @@ const TimeList = () => {
         <TrendBtn
           className="trending"
           onClick={() => {
-            navigate("/");
+            navigate("/")
           }}
         >
           <svg
@@ -43,7 +43,7 @@ const TimeList = () => {
         <LatestBtn
           className="latest"
           onClick={() => {
-            navigate("/getAllPostByTime");
+            navigate("/getAllPostByTime")
           }}
         >
           <svg
@@ -67,18 +67,18 @@ const TimeList = () => {
               <div>
                 <Content key={post.postId} post={post} />;
               </div>
-            );
+            )
         })}
       </Box>
     </Layout>
-  );
-};
+  )
+}
 
-export default TimeList;
+export default TimeList
 
 const Layout = styled.div`
   background-color: #f8f9fa;
-`;
+`
 
 const TrendBtn = styled.button`
   /* background-color: aqua; */
@@ -91,16 +91,16 @@ const TrendBtn = styled.button`
   line-height: normal;
   letter-spacing: normal;
 
-  color: #868E96;
+  color: #868e96;
   background-color: #f8f9fa;
   border: none;
-  border-bottom: 2px solid #868E96;
+  border-bottom: 2px solid #868e96;
   margin-right: 15px;
 
   &:hover {
     cursor: pointer;
   }
-`;
+`
 
 const LatestBtn = styled.button`
   /* background-color: limegreen; */
@@ -121,7 +121,7 @@ const LatestBtn = styled.button`
   &:hover {
     cursor: pointer;
   }
-`;
+`
 
 const PostNav = styled.div`
   /* background-color: yellowgreen; */
@@ -134,7 +134,7 @@ const PostNav = styled.div`
   flex-direction: row;
   align-items: flex-start;
   justify-content: left;
-`;
+`
 
 const Box = styled.div`
   /* background-color: red; */
@@ -148,4 +148,4 @@ const Box = styled.div`
   justify-content: start;
 
   margin: 20px auto 0;
-`;
+`
