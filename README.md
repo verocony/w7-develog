@@ -1,7 +1,7 @@
 # Welcome to REACT! Clone Coding _ develog |  😎
 ![]()
 
-▶️[Go to Project](https://w7-develog.netlify.app/)
+▶️[Go to Project](https://hanghae-7-w-clone.vercel.app//)
 
 ## 👉 페이지 소개
 실제 서비스 중 하나를 선택해서, 해당 서비스를 CRUD 과정을 포함하여 직접 구현
@@ -13,8 +13,7 @@
 <br>
 
 ## 👉 기술 스택
-> CSS (Styled Component) / REACT(JS, JSX) / Redux(@Toolkit) / vercel 
-<br>
+> CSS (Styled Component) / REACT(JS, JSX) / Redux(@Toolkit) / vercel <br>
 
 ## 👉 컴포넌트 구성 및 WF
 ![]()
@@ -33,6 +32,116 @@
 </div>
 </details>
 <br>
+
+![]()
+<details>
+<summary> Project Tree </summary>
+<div markdown="1>
+
+![] (
+  ```
+Hanghae-7W-Clone
+├─ README.md
+├─ src
+│  ├─ components
+│  │  ├─ assets
+│  │  │  ├─ detailHeaderLogo.png
+│  │  │  ├─ fonts
+│  │  │  │  ├─ FiraMono-Bold.woff
+│  │  │  │  ├─ FiraMono-Medium.woff
+│  │  │  │  ├─ FiraMono-Regular.woff
+│  │  │  │  ├─ fonts.js
+│  │  │  │  ├─ NotoSans-Black.woff
+│  │  │  │  ├─ NotoSans-Bold.woff
+│  │  │  │  ├─ NotoSans-Medium.woff
+│  │  │  │  └─ NotoSans-Regular.woff
+│  │  │  └─ GlobalStyle.jsx
+│  │  ├─ detail
+│  │  │  ├─ CommentCard.jsx
+│  │  │  ├─ CommentContainer.jsx
+│  │  │  ├─ CommentForm.jsx
+│  │  │  ├─ CommentList.jsx
+│  │  │  └─ DetailContainer.jsx
+│  │  ├─ elements
+│  │  │  ├─ Box.jsx
+│  │  │  ├─ Button.jsx
+│  │  │  ├─ Grid.js
+│  │  │  ├─ Input.jsx
+│  │  │  └─ Text.jsx
+│  │  ├─ features
+│  │  │  ├─ Content.jsx
+│  │  │  ├─ LikeList.jsx
+│  │  │  ├─ List.css
+│  │  │  ├─ Post.jsx
+│  │  │  ├─ PostItem.jsx
+│  │  │  ├─ PostList.jsx
+│  │  │  ├─ SearchList.jsx
+│  │  │  └─ TimeList.jsx
+│  │  ├─ Layout
+│  │  │  ├─ Footer.css
+│  │  │  ├─ Footer.jsx
+│  │  │  ├─ Grid.jsx
+│  │  │  ├─ Header.css
+│  │  │  ├─ Header.jsx
+│  │  │  ├─ MyPageHeader.css
+│  │  │  └─ MyPageHeader.jsx
+│  │  ├─ modal
+│  │  │  ├─ Login.jsx
+│  │  │  ├─ Modal.js
+│  │  │  ├─ Portal.js
+│  │  │  ├─ Potal.js
+│  │  │  └─ Signup.jsx
+│  │  └─ update
+│  │     ├─ UpdateContent.jsx
+│  │     └─ UpdateForm.jsx
+│  ├─ hooks
+│  │  ├─ useConfirm.jsx
+│  │  └─ useInput.jsx
+│  ├─ index.js
+│  ├─ index.scss
+│  ├─ logo.svg
+│  ├─ pages
+│  │  ├─ DetailPage.jsx
+│  │  ├─ Editor.jsx
+│  │  ├─ Home.jsx
+│  │  ├─ MyPage.css
+│  │  ├─ MyPage.jsx
+│  │  ├─ Search.jsx
+│  │  ├─ UpdatePage.jsx
+│  │  └─ Write.jsx
+│  ├─ redux
+│  │  ├─ config
+│  │  │  └─ configureStore.js
+│  │  └─ modules
+│  │     ├─ cmtSlice.js
+│  │     ├─ imageSlice.js
+│  │     ├─ listSlice.js
+│  │     ├─ mypageSlice.js
+│  │     ├─ postSilice2.js
+│  │     ├─ postSlice.js
+│  │     ├─ postSlice2.js
+│  │     ├─ searchSlice.js
+│  │     └─ userSlice.js
+│  ├─ reportWebVitals.js
+│  ├─ router
+│  │  ├─ App.css
+│  │  ├─ App.js
+│  │  ├─ routes
+│  │  │  └─ routes.js
+│  │  └─ routes.js
+│  ├─ serviceWorker.js
+│  ├─ setupTests.js
+│  └─ shared
+│     ├─ Apis.js
+│     └─ Cookie.js
+└─ yarn.lock
+
+```
+)
+</div>
+</details>
+<br>
+
 
 ## 👉 구현 기능
 ### 1. Sign-up / in / out (Create)
@@ -56,7 +165,7 @@
 ### 5. My-Page (Read)
 - Read : userId로 개인의 포스팅 정보를 가져와서 본인만 접근할 수 있는 페이지에서 자신의 게시물을 관리, 개인 프로필 수정 및 관리 가능
 
-### 6. Env ()
+### 6. Env (Enviroment Variable)
 - 개발 모드와 배포모드를 나눠 개발모드일때만 redux devtool이 보이도록 구현하고 api의 url을 환경변수로 지정하였습니다.
 
 ### 7. Custom Hook
@@ -64,10 +173,10 @@
 - Global Styled-component를 이용하여 컴포넌트의 재사용성을 높인 버튼 컴포넌트 활용
 
 ### 8. Redux toolkit 활용 (thunkAPI)
-- 기존 보다 코드량을 줄이고 미들웨어 개념을 통해 리듀서를 비동기 처리하는방법을 알게되었습니다.
+- 기존 보다 코드량을 줄이고 미들웨어 개념을 통해 리듀서를 비동기 처리하는방법을 알게되었습니다. Axios를 통해 미들웨어를 활용한 비동기 처리과정에서 기초적인 Async-await 구문에서 더 나아가서 인스턴스화 시켜서 코드를 간소화 시키고 가독성을 높였습니다.
 
-### 9. json-server & Heroku - Mock server 배포
-- Back-end의 API작업이 완료되지 않았을때의 상황을 가정하여 json-server를 이용하여 간단한 nosql Mock 서버 구성 및 Heroku로 서버 배포
+### 9. json-server - Mock server 배포
+- Back-end의 API작업이 완료되지 않았을때의 상황을 가정하여 json-server를 이용하여 간단한 nosql Mock 서버 구성, 서버로 들어가는 DB들이 JSON 형식으로 제대로 들어가고 있는지 미리 확인하므로써 전달 형태를 미리 일치시키는 작업과 함께, 직렬화되지 않은 데이터들을 json.stringify를 통해 object를 string type으로 변경시켜서 전달하므로써 API 명세서를 정확하게 구현하고자 했습니다.
 
 ### 10. Redux devtool 비활성화 처리
 
@@ -81,12 +190,12 @@ Todo 컴포넌트의 <Todobox />`border, color 요소를 isdone의 value에 따�
 모든 프로젝트에 적용 가능한 혹은 스타일만 수정하여 활용가능할 정도로 구현하지는 않았으나,<br>
 프로젝트 볼륨에 맞춘 color / size 속성을 활용할 수 있는 컴포넌트로 구성
 
-### 토글 UI 
-- (isdiplay = state ? none : block)
-- 정확히 표현하자면 토글 방식이라기보다는 `버튼 클릭 시 전환`되는 UI 구현
-- 적용범위 : <TodoList> 페이지 - 해야할일/완료한일 <Detail> 페이지 - 댓글창(노출, 숨김)
+### Portal로 Modal 구현
+- App.js 바로 하위에 Modal 컴포넌트를 만들어서 전역상태(Boolean)를 통해 show/hide하는 모달을 생성했습니다.
+- 사용자의 입장에서 계속되는 페이지 렌더링을 줄이기 위해 모달 내에서 회원가입과 로그인 정보들을 입력할 수 있는 창을 모달로 구현했습니다.
+- 모달에 커스텀 훅을 사용해서 실제 서비스와 가장 유사하기 구현하려고 했습니다.
 
-### Mobile responsive web
+<!-- ### Mobile responsive web -->
 <!-- ![](https://velog.velcdn.com/images/joyfive/post/5c91d69b-2ce0-4dbb-b3bd-7494035b2688/image.gif) -->
 
 
@@ -94,52 +203,60 @@ Todo 컴포넌트의 <Todobox />`border, color 요소를 isdone의 value에 따�
 
 ## 👉 배운점 & 아쉬운점
 ### 배운점👍
-<!-- <기쁨 @joyfive>
-- **Redux Toolkit, Thunk** <br>
-리덕스 툴킷을 활용하여 기존 전역 상태관리 store와 json-server를 연결하여 통신하는 방법을 배웠습니다.
+<기쁨 @joyfive>
+- ** ** <br>
+ 
 
-- **Custom Component 세분화** <br> 다양한 페이지, 컴포넌트에서 활용할 수 있는 UI 컴포넌트를 만들어서, 추후 스타일링 시 더욱 빠르고 효율적인 작업이 가능하리라 기대됩니다. 
+- ** ** <br>   
 
-- **UI 숨김처리를 활용한 토글방식** <br>
-display: `none`, `block` 속성과 useState를 활용하여 버튼 클릭 시 상태값이 업데이트되어 css props가 변경되도록 토글 UI를 구현했습니다. <br>
+- ** ** <br>
+  <br>
 
 <br>
 
-<현홍 @minhyeonhong>
-- **redux toolkit** <br>
-기존 보다 코드량을 줄이고 미들웨어 개념을 통해 리듀서를 비동기 처리하는방법을 알게되었습니다.
+<지윤 @verocony>
+- ** ** <br>
+ 
 
-- **json-server** <br>
-Back-end의 API작업이 완료되지 않았을때 json-server를 이용하여 간단한 nosql서버를 구성하고
-이를 axios를 이용하여 json-server로 데이터를 가져오거나 수정하는 것을 알게되었습니다.
+- ** ** <br>
+
+<민지 @minzzjo>
+- **CRUD 기능 구현 make-up** 
+리덕스 툴킷을 활용하여 Axios를 통한 GET/POST/DELETE/PUT 방식의 DB전송 과정을 직접 적용해 보고 실현할 수 있게 되었다.<br>
+
+- **협업의 시너지**
+지난 몇 주간 개인과제를 계속해서 진행해 오면서, 혼자서 모든 과정을 계획하고 해결하는 과정에서 많은 어려움을 겪었고, 함께 손발을 맞춰서 최종 결과물을 내는 데 있어서 버거움이 있었다. 이번 주차에서는 그동안 개선해야 한다고 생각했던 협업과 소통의 중요성을 계속 상기시키면서 팀의 일원으로서 모두가 노력한 결과물을 만들어 내기 위해 더 힘을 내서 열심히 하려고 애썼다. 혼자 보다는 같이 무언가를 해 낸다는 것이 얼마나 중요한지를 정말 많이 느낄 수 있었다.<br>
+
 
 ### 아쉬운점👀
 <기쁨 @joyfive>
-- **욕심이 과했다😢**<br>
-2명이 함께 진행하는 프로젝트이지만 challenge로 각자 독자적인 기능개발 후 <br> merge하여 스타일링 작업을 진행하기로 계획하였으나, 실제 프로젝트 진행 시 팀원과의 개발속도에 차이가 있어, <br> 저는 게시판 CRUD까지만 진행한 상태에서 댓글 CRUD 베리에이션 작업은 중간에 중단하고 <br>댓글 기능은 현홍님의 작업 소스로 그대로 사용하게 되었습니다. <br>
-ㄴ 새로이 배운 내용이 많아 개념을 익히면서 3-4일 만에 작업을 완료하기에는 다소 빠듯한 일정이었던 것 같습니다. 팀 과제로 나누어 진행했다면 정상적인 속도이기는 하나, 앞으로 기능 구현 시간을 더 단축시키기 위해 CRUD 기본 개념을 반복적으로 연습하고자 합니다:)
+- ** **<br>
+
+ㄴ 
 <br>
 
-<현홍 @minhyeonhong>
-- **게시글-댓글 DB 종속처리** <br>
-ㄴ투두 지웠을때 댓글 같이 안사라짐 <br>
-ㄴtodoList에서 게시물을 삭제하면 해당 게시물에 있던 댓글들이 같이 삭제되지 않아 <br>
-ㄴ삭제했던 글의 id값으로 글을 다시 등록하면 댓글이 자동으로 달려있음 <br>
-ㄴ반복문을 돌려 댓글들을 지울수 있었겠지만 사이트의 퍼포먼스를 고려해 하지않음 <br>
+<지윤 @verocony>
+- ** ** <br>
+ 
 
-- **memo 최적화 미사용** <br>
-ㄴ시간 관계상 불필요한 렌더링을 막는 최적화 작업까지는 진행하지 못하고 엑스트라 리듀서로만 구현함<br>
-ㄴaxios로 api통신후 받는 response값을 state에 반영 했다면 퍼포먼스가 더 나왔겠지만<br>
-axios를 익히기 위해 state의 값이 변경될 때 마다 axios로 다시get하는 방식으로 처리 후 최적화 작업은 시간 관계상 진행하지 못함
+- ** ** <br>
+
+<민지 @minzzjo>
+- **기본적인 CRUD구현과 더불어 추가 기능 구현** 
+GET 방식으로 데이터를 불러와서 렌더링 하는 과정이 많았어서, 다른 부분을 해 내지 못한게 아쉽다. 조금 더 실전 프로젝트를 위해 미리 익히고 가야 할 기능들을 완전히 내 것으로 만들어보고 시행착오를 더 많이 겪지 못해 아쉽다.<br>
+ 
+
+- **서버 연결 및 배포 과정에서의 돌발상황 대처 미흡** 
+지난 주차를 겪으며, 제출 당일에는 어떤 기능구현과 퍼블리싱을 하지 않고 오롯이 배포에만 집중해야 최대한 오류들을 다 보완한 결과물을 낼 수 있다는 걸 느꼈지만, 기능구현을 꼭 완성해 보고 싶다는 욕심이 커서 큰 스코프가 아니었음에도 구현 과정이 오래 걸렸고 그로 인해 디버깅 및 배포 과정이 많이 미뤄져서 아쉽다. 모든 일은 정해진 기한이 있고, 주어진 시간 안에 해결해 내는 것이 중요하기 때문에 시간관리를 잘 하면서 선택과 집중을 적절하게 하면서 진행해 나가야 할 것 같다.<br>
 
 <br>
 
 ## 진도체크
 ### 이전 목표 : *Success!*<br> 
-1. ~~CRUD, useStae, Redux 활용 다지기~~<br>
-2. ~~토글 UI 연습하기~~<br> -->
+1. ~~기본 CRUD 구현 make-up~~<br>
+2. ~~마지막 제출 전에 CSS완성 후 최종 기능구현 테스트 및 배포~~<br>
 
 
-Copyright 2022. hang-hae99 9th W5 team C2. all rights reserved.
+Copyright 2022. hang-hae99 9th W7 team C1. all rights reserved.
 
 <!-- ## 항해 99 클론코딩 : 프론트엔드 --! >
