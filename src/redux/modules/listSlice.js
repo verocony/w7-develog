@@ -1,8 +1,11 @@
+
 // 첫 화면에 나오는 포스트 목록들의 모듈 (GET)
 
 import { createSlice } from "@reduxjs/toolkit";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import Apis from "../../shared/Apis";
+import Apis from "../../shared/Apis"
+
 
 const initialState = {
   list: [
@@ -19,7 +22,7 @@ const initialState = {
       userLike: true,
       countLike: 0,
       countCmt: 0,
-    }
+    },
   ],
   isLoading: false,
   error: null,
@@ -31,11 +34,11 @@ export const __getLikeList = createAsyncThunk(
   async (payload, thunkAPI) => {
     try {
       // console.log("getList payload : ", payload)
-      const res = await Apis.getPostLikeAX(payload)
-      return thunkAPI.fulfillWithValue(res.data);
-        
+
+      const res = await Apis.getPostAX(payload)
+      return thunkAPI.fulfillWithValue(res.data)
     } catch (error) {
-      return thunkAPI.rejectWithValue(error);
+      return thunkAPI.rejectWithValue(error)
     }
   }
 )
@@ -66,14 +69,16 @@ export const listSlice = createSlice({
     [__getLikeList.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.isSuccess = false;
+
       console.log("action.payload", action.payload)
-      state.list = action.payload.data;
+      state.list = action.payload.data
     },
     [__getLikeList.rejected]: (state, action) => {
       state.isLoading = false;
       state.isSuccess = false;
       state.error = action.payload;
     },
+    
     // 게시글 작성시간 순서 Sort
     [__getTimeList.pending]: (state) => {
       state.isLoading = true;
@@ -88,8 +93,13 @@ export const listSlice = createSlice({
       state.isLoading = false;
       state.isSuccess = false;
       state.error = action.payload;
+
     },
   },
 })
 
-export default listSlice.reducer;
+
+// 액션크리에이터는 컴포넌트에서 사용하기 위해 export 하고
+export const {} = listSlice.actions
+// reducer 는 configStore에 등록하기 위해 export default 합니다.
+export default listSlice.reducer

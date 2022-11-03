@@ -9,3 +9,4 @@ export const getCookie = (name) => {
 export const delCookie = (name) => {
   return cookies.remove(name, { path: "/" })
 }
+//

@@ -1,32 +1,33 @@
 import axios from "axios"
 import { Cookies } from "react-cookie"
 
-// 인스턴스 3개 나누기 가능
 const cookies = new Cookies()
+
 const noToken = axios.create({
+  // 추후에 로컬에서 서버 주소로 변경해야 함
   baseURL: process.env.REACT_APP_URL,
-  // headers: {
-  //   accept: "application/json",
-  //   "Access-Control-Allow-Origin": "*",
-  // },
+  headers: {
+    // "content-type": "application/json;charset=UTF-8",
+    // accept: "application/json",
+  },
   withCredentials: true,
 })
 
 const token = axios.create({
+  // 추후에 로컬에서 서버 주소로 변경해야 함
   baseURL: process.env.REACT_APP_URL,
   headers: {
     accept: "application/json",
-    Access_Token: `Bearer ${cookies.get("token")}`,
-    "Access-Control-Allow-Origin": "*",
+    Access_Token: `${cookies.get("Access_Token")}`,
   },
   withCredentials: true,
 })
 
 const file = axios.create({
+  // 추후에 로컬에서 서버 주소로 변경해야 함
   baseURL: process.env.REACT_APP_URL,
   headers: {
     enctype: "multipart/form-data",
-
     Access_Token: `Bearer ${cookies.get("token")}`,
   },
   withCredentials: true,
@@ -38,15 +39,18 @@ export const Apis = {
   //회원가입
   signupAX: (signupInfo) => noToken.post(`/team01/member/signup`, signupInfo),
   //이메일중복확인
-  usernameAX: (userId) => noToken.post(`/team01/member/idCheck`, userId),
+  usernameAX: (userid) => noToken.post(`/team01/member/idCheck`, userid),
+
   //게시글 작성
-  filePostAX: (payload) => file.post(`/team01/post`, payload),
+  postFileAX: (payload) => file.post(`/team01/post`, payload),
   //게시글 수정
-  putPostAX: (postId) => file.put(`/team/01/post/${postId}`, postId),
+  putPostAX: (postId, postInfo) =>
+    token.put(`/team/01/post/${postId}`, postInfo),
   //게시글 삭제
   deletePostAX: (postId) => token.delete(`/team/01/post/${postId}`),
   //게시글 좋아요
   likePostAX: (postId) => token.get(`/team01/likes/${postId}`),
+
   //게시글 전체 조회 - 좋아요순
   getPostLikeAX: () => noToken.get(`/team01/getAllPostByLike`),
   //게시글 전체 조회 - 시간순
@@ -58,13 +62,15 @@ export const Apis = {
   postCmtAX: (commentId) => token.post(`/team01/comment/${commentId}`),
   //댓글 삭제
   deleteCmtAX: (commentId) => token.post(`/team01/comment/${commentId}`),
+
   //마이페이지 조회
   getMyPageAX: (userId) => noToken.get(`/team01/getMyPage?id=${userId}`),
   //마이페이지 작성자 소개 수정
   postMyPageAX: (payload) => token.post(`team01/mypage/intro`, payload),
   //마이페이지 이미지 수정
   postMyImgAX: (payload) => token.post(`/team01/mypage/img`, payload),
+
+  //검색
+  getSearchAX: (keyword) => noToken.get(`/team01/search/?content=${keyword}`),
 }
-
-export default Apis;
-
+export default Apis

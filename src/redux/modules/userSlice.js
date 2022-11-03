@@ -18,6 +18,7 @@ export const userSignin = createAsyncThunk(
             console.log(response.headers)
             setCookie("Access_Token", response.headers.access_token)
             setCookie("userId", response.data.data.userId)
+            setCookie("userName", response.data.data.userName)
             setCookie("userImg", response.data.data.userImgUrl)
             setCookie("intro", response.data.data.intro)
             alert(response.data.msg)
@@ -75,13 +76,14 @@ export const userCheck = createAsyncThunk(
 export const userSignup = createAsyncThunk(
   "user/userSignUp",
   async (signupInfo, thunkAPI) => {
+    const postInfo = signupInfo.postInfo
     Apis.signupAX(signupInfo)
     try {
       console
         .log("join")
         .then((response) => {
           console.log("joinAX response", response)
-
+          alert(response.data.msg)
           return thunkAPI.fulfillWithValue(response.data)
         })
         .catch()
@@ -113,15 +115,16 @@ export const userSlice = createSlice({
     modal: false,
   },
   reducers: {
-    //모달 토글
-    modalTogle(state, action) {
-      state.modal = !state.modal
-    },
+    // //모달 토글
+    // modalTogle(state, action) {
+    //   state.modal = !state.modal
+    // },
     logout: (state) => {
-      delCookie("access-token")
-      delCookie("user-info")
-      delCookie("user-profile")
-
+      delCookie("Access_Token")
+      delCookie("userId")
+      delCookie("userName")
+      delCookie("userImg")
+      delCookie("intro")
       state.loading = false
       state.userInfo = null
       state.userToken = null
