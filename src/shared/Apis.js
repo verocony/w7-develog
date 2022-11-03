@@ -28,7 +28,7 @@ const file = axios.create({
   baseURL: process.env.REACT_APP_URL,
   headers: {
     enctype: "multipart/form-data",
-    Access_Token: `Bearer ${cookies.get("token")}`,
+    Access_Token: `${cookies.get("Access_Token")}`,
   },
   withCredentials: true,
 })

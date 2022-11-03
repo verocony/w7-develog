@@ -3,7 +3,7 @@ import user from "../modules/userSlice"
 import post from "../modules/postSlice"
 import list from "../modules/listSlice"
 import cmt from "../modules/cmtSlice"
-import posts from "../modules/postSilice2"
+import posts from "../modules/postSlice2"
 import mylist from "../modules/mypageSlice"
 import search from "../modules/searchSlice"
 

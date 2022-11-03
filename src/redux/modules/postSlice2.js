@@ -13,6 +13,7 @@ export const addPost = createAsyncThunk(
     try {
       await Apis.postFileAX(payload).then((response) => {
         console.log("response", response.data)
+        window.location.replace("/")
         return thunkAPI.fulfillWithValue(payload)
       })
     } catch (error) {

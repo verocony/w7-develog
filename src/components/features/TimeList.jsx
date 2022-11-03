@@ -7,7 +7,7 @@ import { __getTimeList } from "../../redux/modules/listSlice"
 import styled from "styled-components"
 import Content from "./Content"
 import Header from "../Layout/Header"
-
+// 시간순 리스트
 const TimeList = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -65,7 +65,7 @@ const TimeList = () => {
           if (post.length !== 0)
             return (
               <div>
-                <Content key={post.postId} post={post} />;
+                <Content key={post.postId} post={post} />
               </div>
             )
         })}

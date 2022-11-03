@@ -1,39 +1,36 @@
 // 메인 리스트에 작은 카드 1개 내용
 
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { __getLikeList, __getTimeList } from "../../redux/modules/listSlice";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { __getLikeList, __getTimeList } from "../../redux/modules/listSlice"
+import { useNavigate } from "react-router-dom"
+import styled from "styled-components"
 
 const Content = ({ post }) => {
-  const posts = useSelector((store) => store.list.list);
-  console.log("store.list", posts);
+  const posts = useSelector((store) => store.list.list)
+  console.log("store.list", posts)
 
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
   const onClickPost = () => {
-    navigate(`/getPost/${posts.postId}`);
-  };
+    navigate(`/post/${post.postId}`)
+  }
 
   console.log("post", post.postId)
 
   useEffect(() => {
-    dispatch(__getLikeList());
-  }, [dispatch]);
+    dispatch(__getLikeList())
+  }, [dispatch])
 
   useEffect(() => {
-    dispatch(__getTimeList());
-  }, [dispatch]);
+    dispatch(__getTimeList())
+  }, [dispatch])
 
   return (
     <PostWrap key={post.postId}>
-      {/* <ImgBox>
-        <PostImg src={post.postImg} alt="postImg" />
-      </ImgBox> */}
-
       <ImgBox>
-        <PostImg src={post.postImg} alt="postImg" />
+        <PostImg src={post.postImg} alt="" />
       </ImgBox>
 
       <div>
@@ -43,11 +40,6 @@ const Content = ({ post }) => {
         </PostContent>
 
         <InfoText>
-          <Tag>
-            {/* 태그 하나마다 버튼을 달아야?? map돌려서?? */}
-            <TagBtn>{post.tag}</TagBtn>
-          </Tag>
-
           <PostCnt>
             <span>{post.countTime}</span>
             <span>{post.modifyPost}</span>
@@ -58,7 +50,7 @@ const Content = ({ post }) => {
 
           <PostInfo>
             <UserInfo>
-              <UserImg src={post.userImg} alt="userImg" />
+              <UserImg src={post.userImg} alt="" />
               <Name>
                 <By>by </By>
                 {post.userName}
@@ -79,22 +71,22 @@ const Content = ({ post }) => {
         </InfoText>
       </div>
     </PostWrap>
-  );
-};
+  )
+}
 
-export default Content;
+export default Content
 
 const ImgBox = styled.div`
+  display: ${(props) => props.display};
   width: 300px;
   min-height: 167px;
   max-height: 167px;
-`;
+`
 
 const PostImg = styled.img`
-  width: auto;
-  min-height: 167px;
-  max-height: 167px;
-
+  width: 100%;
+  height: 167px;
+  object-fit: cover;
   position: center;
   background-position: auto;
 
@@ -104,7 +96,7 @@ const PostImg = styled.img`
   justify-content: space-between;
 
   margin: auto;
-`;
+`
 
 const PostWrap = styled.div`
   width: 300px;
@@ -121,7 +113,7 @@ const PostWrap = styled.div`
   box-shadow: 0 0 0 0.05px;
 
   margin: 0 10px 30px;
-`;
+`
 
 const PostContent = styled.div`
   height: 82px;
@@ -136,14 +128,14 @@ const InfoText = styled.div`
 
 const PostTitle = styled.h4`
   font-size: 1rem;
-  margin: 0px 0px 0.25rem;
+  margin: 20px 0px 0.25rem;
   line-height: 1.5;
   word-break: break-word;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   color: var(--text1);
-`;
+`
 const PostText = styled.p`
   margin: 0px 0px 1.5rem;
   word-break: break-word;
@@ -157,7 +149,7 @@ const PostText = styled.p`
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--text2);
-`;
+`
 
 const UserImg = styled.img`
   width: 24px;
@@ -169,7 +161,7 @@ const UserImg = styled.img`
   height: 1.5rem;
   display: block;
   margin-right: 0.5rem;
-`;
+`
 
 const PostInfo = styled.div`
   /* background-color: yellowgreen; */
@@ -181,7 +173,7 @@ const PostInfo = styled.div`
   align-items: center;
   justify-content: space-between;
   margin: 10px auto 0;
-`;
+`
 
 const PostLike = styled.div`
   /* background-color: yellowgreen; */
@@ -191,7 +183,7 @@ const PostLike = styled.div`
   align-items: center;
   gap: 10px;
   font-size: 13px;
-`;
+`
 
 const Heart = styled.svg`
   width: 12px;
@@ -216,19 +208,19 @@ const PostCnt = styled.div`
   align-items: center;
   justify-content: left;
   margin-left: 15px;
-`;
+`
 
 const Line = styled.hr`
-  background-color: #E2E2E2;
+  background-color: #e2e2e2;
   width: 280px;
   border: 0;
   height: 1px;
-`;
+`
 
 const Tag = styled.div`
   /* background-color: lightcoral; */
   margin-top: 8px;
-`;
+`
 
 const TagBtn = styled.button`
   width: 50px;
@@ -236,10 +228,10 @@ const TagBtn = styled.button`
   border: none;
   border-radius: 10px;
 
-  background-color: #CFFAED;
-  color:#12b886;
+  background-color: #cffaed;
+  color: #12b886;
   margin: 0 10px;
-`;
+`
 
 const By = styled.span`
   font-size: 12px;

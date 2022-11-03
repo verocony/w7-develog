@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styled from "styled-components"
 import { getSearch } from "../../redux/modules/searchSlice"
-import PostItem from "./PostItem"
+import Content from "./Content"
+import Header from "../Layout/Header"
 
 const SearchList = () => {
   const dispatch = useDispatch()
@@ -16,38 +17,40 @@ const SearchList = () => {
   }, [dispatch])
 
   return (
-    <>
-      <div>
-        <div className="post-container">
-          {searchs.map((post) => {
-            if (post.length !== 0)
-              return <PostItem key={post.postId} post={post} />
-          })}
-        </div>
-      </div>
-    </>
+    <Container>
+      <Box className="post-container">
+        {searchs.map((post) => {
+          if (post.length !== 0)
+            return <Content key={post.postId} post={post} />
+        })}
+      </Box>
+    </Container>
   )
 }
 
 export default SearchList
 
-const ListMenu = styled.div`
-  width: 95%;
-  max-width: 1376px;
-  height: 48px;
+const Layout = styled.div`
+  /* background-color: #f8f9fa; */
+`
 
-  font-family: "Noto Sans KR", sans-serif;
-  font-size: 16px;
-  text-align: start;
-  line-height: normal;
-  letter-spacing: normal;
+const Box = styled.div`
+  /* background-color: red; */
+  width: 90%;
+  max-width: 1280px;
 
-  color: #212529;
-  background-color: #f8f9fa;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  margin: auto;
-  padding-left: 30px;
-  gap: 12px;
+  justify-content: start;
+
+  margin: 20px auto 0;
+`
+
+const Container = styled.div`
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  gap: 10px 20px;
+  align-items: stretch;
 `

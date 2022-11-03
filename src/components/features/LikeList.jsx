@@ -1,29 +1,29 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { __getLikeList } from "../../redux/modules/listSlice";
-import Content from "./Content";
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import styled from "styled-components"
+import { __getLikeList } from "../../redux/modules/listSlice"
+import Content from "./Content"
 import Header from "../Layout/Header"
 import "./List.css"
 
 const LikeList = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const posts = useSelector((store) => store.list.list);
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const posts = useSelector((store) => store.list.list)
 
   useEffect(() => {
-    dispatch(__getLikeList());
-  }, [dispatch]);
+    dispatch(__getLikeList())
+  }, [dispatch])
 
   return (
     <Layout>
-      <Header/>
+      <Header />
       <PostNav className="post-nav">
         <TrendBtn
           className="trending"
           onClick={() => {
-            navigate("/recent");
+            navigate("/recent")
           }}
         >
           <svg
@@ -42,7 +42,7 @@ const LikeList = () => {
         <LatestBtn
           className="latest"
           onClick={() => {
-            navigate("/getAllPostByTime");
+            navigate("/recent")
           }}
         >
           <svg
@@ -63,20 +63,19 @@ const LikeList = () => {
         <Box className="post-container">
           {posts.map((post) => {
             if (post.length !== 0)
-              return <Content key={post.postId} post={post} />;
+              return <Content key={post.postId} post={post} />
           })}
         </Box>
       </Container>
-      
     </Layout>
-  );
-};
+  )
+}
 
-export default LikeList;
+export default LikeList
 
 const Layout = styled.div`
   background-color: #f8f9fa;
-`;
+`
 
 const TrendBtn = styled.button`
   /* background-color: aqua; */
@@ -98,7 +97,7 @@ const TrendBtn = styled.button`
   &:hover {
     cursor: pointer;
   }
-`;
+`
 
 const LatestBtn = styled.button`
   /* background-color: limegreen; */
@@ -114,12 +113,12 @@ const LatestBtn = styled.button`
   color: #868e96;
   background-color: #f8f9fa;
   border: none;
-  border-bottom: 2px solid #868E96;
+  border-bottom: 2px solid #868e96;
 
   &:hover {
     cursor: pointer;
   }
-`;
+`
 
 const PostNav = styled.div`
   /* background-color: yellowgreen; */
@@ -132,7 +131,7 @@ const PostNav = styled.div`
   flex-direction: row;
   align-items: flex-start;
   justify-content: left;
-`;
+`
 
 const Box = styled.div`
   /* background-color: red; */
@@ -146,11 +145,11 @@ const Box = styled.div`
   justify-content: start;
 
   margin: 20px auto 0;
-`;
+`
 
 const Container = styled.div`
   display: grid;
   grid-template-rows: repeat(3, 1fr);
   gap: 10px 20px;
   align-items: stretch;
-`;
+`

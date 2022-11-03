@@ -1,18 +1,18 @@
 // 마이페이지 상단에 유저아이디가 들어간 페이지 타이틀("rtan_Kim.log")이 있는 헤더
 
-import React from "react";
-import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
-import { getCookie } from "../../shared/Cookie";
+import React from "react"
+import { useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import styled from "styled-components"
+import { getCookie } from "../../shared/Cookie"
 
 const Header = () => {
-  const data = useSelector((state) => state.list.list);
-  const navigate = useNavigate();
+  const data = useSelector((state) => state.list.list)
+  const navigate = useNavigate()
 
   const onClickNewPost = () => {
-    navigate("/post");
-  };
+    navigate("/post")
+  }
   return (
     <HeaderLine>
       {/* 벨로그 로고 이미지 */}
@@ -20,13 +20,13 @@ const Header = () => {
         src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE3zvkHszd7nbvfZmlMKjqnZpQtqQGC3XaG3fovvPaeKYkhTdT6QtY1nQopUaYdJaiVkw&usqp=CAU"
         alt="mypage-logo"
         onClick={() => {
-          navigate("/");
+          navigate("/")
         }}
       />
       <Logo
         className="logo"
         onClick={() => {
-          navigate("/");
+          navigate("/")
         }}
       >
         {`${getCookie("userId")}`}.log
@@ -67,10 +67,10 @@ const Header = () => {
         </div>
       </Icons>
     </HeaderLine>
-  );
-};
+  )
+}
 
-export default Header;
+export default Header
 
 const VLogo = styled.img`
   width: 24px;
@@ -95,7 +95,7 @@ const HeaderLine = styled.div`
   justify-content: space-between;
 
   margin: 0 auto 24px;
-`;
+`
 
 const Logo = styled.div`
   /* background-color: yellowgreen; */
@@ -109,7 +109,7 @@ const Logo = styled.div`
   &:hover {
     cursor: pointer;
   }
-`;
+`
 
 const Icons = styled.div`
   /* background-color: aquamarine; */
@@ -123,13 +123,13 @@ const Icons = styled.div`
   &:hover {
     cursor: pointer;
   }
-`;
+`
 
 const UserImg = styled.img`
   width: 40px;
   height: 40px;
   border-radius: 100%;
-`;
+`
 
 const HeaderBtn = styled.button`
   background-color: #f8f9fa;
@@ -152,4 +152,4 @@ const HeaderBtn = styled.button`
     background-color: #212529;
     color: #f8f9fa;
   }
-`;
+`
