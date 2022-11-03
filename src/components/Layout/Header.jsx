@@ -67,7 +67,15 @@ const Header = () => {
               ></path>
             </svg>
           </div>
-          <HBtn2 onClick={onClickNewPost}>새 글 작성</HBtn2>
+          <HBtn2
+            onClick={() => {
+              getCookie("Access_Token")
+                ? onClickNewPost()
+                : alert("로그인 후 이용해주세요.")
+            }}
+          >
+            새 글 작성
+          </HBtn2>
           {getCookie("Access_Token") ? (
             <Div>
               <HBtn onClick={askLogOut}>
