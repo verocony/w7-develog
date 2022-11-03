@@ -26,7 +26,7 @@ const Post = ({ post, onDelete, id }) => {
   const [useToggle, setUseToggle] = useState("")
 
   //태그 국문 변환용 스테이트
-  const [tag, setTag] = useState("")
+  const [tag, set] = useState("")
 
   // 국문변환 스위치문
   // switch (post.tag) {

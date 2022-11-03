@@ -2,6 +2,7 @@ import { createSlice, current } from "@reduxjs/toolkit"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { createAction } from "redux-actions"
 import Apis from "../../shared/Apis"
+import { useNavigate } from "react-router-dom"
 import { getCookie } from "../../shared/Cookie"
 
 //  초기값
@@ -21,7 +22,7 @@ export const __getPostDetail = createAsyncThunk(
       console.log("getDetailAX response")
       // .then((response) => {
       //   console.log("response", response.data)
-      return thunkAPI.fulfillWithValue(response.data)
+      return thunkAPI.fulfillWithValue(response.data.data)
       // })
     } catch (error) {
       console.log(error)
@@ -49,6 +50,28 @@ export const __deletePost = createAsyncThunk(
   }
 )
 
+// 게시글 수정
+
+export const __updatePost = createAsyncThunk(
+  "detail/__updatePost",
+  async (payload, thunkAPI) => {
+    console.log(payload)
+
+    try {
+      const response = await Apis.putPostAX(payload)
+
+      // const navigate = useNavigate();
+      // navigate(`/post/${response.data.id}`, {replace: true})
+
+      console.log(response, "게시글 수정 성공")
+      return thunkAPI.fulfillWithValue(payload)
+    } catch (error) {
+      console.log(error, "수정 실패")
+      return thunkAPI.rejectWithValue(error)
+    }
+  }
+)
+
 const postSlice = createSlice({
   name: "post",
   initialState,
@@ -60,10 +83,41 @@ const postSlice = createSlice({
     },
     [__getPostDetail.fulfilled]: (state, action) => {
       state.isLoading = false
-      console.log(action.postId.data)
-      state.postDetail = action.postId.data
+      state.post = action.payload
     },
     [__getPostDetail.rejected]: (state, action) => {
+      state.isLoading = false
+      state.error = action.postId
+    },
+
+    //  게시글 좋아요
+    // [__updatePostHeart.pending]: (state, action) => {
+    //   state.isLoading = true;
+    // },
+    // [__updatePostHeart.fulfilled]: (state, action) => {
+    //   state.isLoading = false;
+
+    //   state.heartPush === true ? state.heartPush = false : state.heartPush = true;
+    //   state.heartCount = action.payload.data;
+    //   console.log(action.payload);
+    //   console.log(state.heartPush);
+    //   console.log(state.heartCount);
+    // },
+    // [__updatePostHeart.rejected]: (state, action) => {
+    //   state.isLoading = false;
+    //   state.error = action.payload;
+    // },
+
+    // 게시글 수정
+    [__updatePost.pending]: (state) => {
+      state.isLoading = true
+    },
+    [__updatePost.fulfilled]: (state, action) => {
+      state.isLoading = false
+      console.log(action.id)
+      state.post = action.payload
+    },
+    [__updatePost.rejected]: (state, action) => {
       state.isLoading = false
       state.error = action.postId
     },
@@ -74,8 +128,6 @@ const postSlice = createSlice({
     },
     [__deletePost.fulfilled]: (state, action) => {
       state.isLoading = false
-      console.log("post delete state post : ", state.post)
-      console.log("post delete action. : ", action.id)
       state.post = state.post.filter(
         (postcard) => postcard.id !== action.id.data
       )

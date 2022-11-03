@@ -95,7 +95,9 @@ const VelInput = styled.input`
   background: white;
   border-right: none;
   outline: none;
+
   border: 0.25px solid #adb5bd;
+
   margin: 5px 0;
   width: 275px;
   :focus {
@@ -103,6 +105,7 @@ const VelInput = styled.input`
   }
   ::placeholder {
     color: #adb5bd;
+
     font-size: 0.8rem;
   }
 `

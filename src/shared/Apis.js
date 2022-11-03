@@ -6,10 +6,6 @@ const cookies = new Cookies()
 const noToken = axios.create({
   // 추후에 로컬에서 서버 주소로 변경해야 함
   baseURL: process.env.REACT_APP_URL,
-  headers: {
-    // "content-type": "application/json;charset=UTF-8",
-    // accept: "application/json",
-  },
   withCredentials: true,
 })
 
@@ -44,10 +40,9 @@ export const Apis = {
   //게시글 작성
   postFileAX: (payload) => file.post(`/team01/post`, payload),
   //게시글 수정
-  putPostAX: (postId, postInfo) =>
-    token.put(`/team/01/post/${postId}`, postInfo),
+  putPostAX: (payload) => file.put(`/team01/post/${payload.id}`, payload.content),
   //게시글 삭제
-  deletePostAX: (postId) => token.delete(`/team/01/post/${postId}`),
+  deletePostAX: (id) => token.delete(`/team01/post/${id}`),
   //게시글 좋아요
   likePostAX: (postId) => token.get(`/team01/likes/${postId}`),
 
@@ -59,9 +54,9 @@ export const Apis = {
   getDetailAX: (postId) => token.get(`/team01/getPost/${postId}`),
 
   //댓글 작성
-  postCmtAX: (commentId) => token.post(`/team01/comment/${commentId}`),
+  postCmtAX: (payload) => token.post(`/team01/comment/${payload.id}`, payload.comment),
   //댓글 삭제
-  deleteCmtAX: (commentId) => token.post(`/team01/comment/${commentId}`),
+  deleteCmtAX: (id) => token.delete(`/team01/comment/${id}`),
 
   //마이페이지 조회
   getMyPageAX: (userId) => noToken.get(`/team01/getMyPage?id=${userId}`),
@@ -72,5 +67,6 @@ export const Apis = {
 
   //검색
   getSearchAX: (keyword) => noToken.get(`/team01/search/?content=${keyword}`),
+
 }
 export default Apis

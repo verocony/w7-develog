@@ -77,16 +77,10 @@ export const userSignup = createAsyncThunk(
   "user/userSignUp",
   async (signupInfo, thunkAPI) => {
     const postInfo = signupInfo.postInfo
-    Apis.signupAX(signupInfo)
     try {
-      console
-        .log("join")
-        .then((response) => {
-          console.log("joinAX response", response)
-          alert(response.data.msg)
-          return thunkAPI.fulfillWithValue(response.data)
-        })
-        .catch()
+      const response = await Apis.signupAX(signupInfo)
+      alert(response.data.msg)
+      return thunkAPI.fulfillWithValue(response.data)
     } catch (error) {
       console.log("joinAX error", error)
       alert(error.response.msg)

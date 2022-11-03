@@ -56,9 +56,7 @@ const Editor = () => {
     let obj = {
       postTitle: postInput.title,
       postContent: postInput.contents,
-      postTag: [postInput.tag],
-    }
-    //console.log(JSON.stringify(obj))
+      postTag: [postInput.tag],}
 
     formData.append("contents", JSON.stringify(obj))
     dispatch(addPost(formData))

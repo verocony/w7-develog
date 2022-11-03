@@ -1,33 +1,3 @@
-// import React from "react";
-// import styled from "styled-components";
-
-// export default function (props) {
-//     const {label, styleClass, onClick, disabled} = props;
-//     return (
-//         <button className={styleClass} onClick={onClick} disabled={disabled}>{label}</button>
-//     );
-// }
-
-// props로 받아오는 요소
-// label => span 태그로 버튼 내부의 글
-// styleClass => 적용될 className
-// disabled => true/ false로 활성화/ 비활성화
-// onClick => onClick 시 이벤트 대응
-
-// import React from "react";
-// import styled, { css } from "styled-components";
-// import flex from "../lib/flex";
-
-// const Button = (props) => {
-//   return (
-//     <StButton {...props} disabled={props.disabled}>
-//       {props.children}
-//     </StButton>
-//   );
-// };
-
-// export default Button;
-
 import React, { Children } from "react"
 import styled from "styled-components"
 

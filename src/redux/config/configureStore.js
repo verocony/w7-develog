@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit"
 import user from "../modules/userSlice"
 import post from "../modules/postSlice"
 import list from "../modules/listSlice"
-import cmt from "../modules/cmtSlice"
+import comment from "../modules/cmtSlice"
 import posts from "../modules/postSlice2"
 import mylist from "../modules/mypageSlice"
 import search from "../modules/searchSlice"
@@ -19,7 +19,7 @@ const store = configureStore({
     // 게시글 상세조회, 삭제
     post,
     // 코멘트
-    cmt,
+    comment,
     // 검색
     search,
     // 게시글 전체조회

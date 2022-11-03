@@ -6,6 +6,7 @@ import { getCookie } from "../../shared/Cookie"
 import Modal from "../modal/Modal.js"
 import Portal from "../modal/Portal.js"
 import { logout } from "../../redux/modules/userSlice"
+
 const Header = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
