@@ -1,20 +1,22 @@
-import React from "react"
-import PostList from "../components/features/PostList"
-import Header from "../components/Layout/Header"
-import { __getList } from "../redux/modules/listSlice"
-import { getSearch } from "../redux/modules/searchSlice"
 
-const homeList = () => {
-  __getList()
-}
+import React from "react";
+import Footer from "../components/Layout/Footer";
+import Header from "../components/Layout/Header";
+import LikeList from "../components/features/LikeList";
+import styled from "styled-components";
+
 const Home = () => {
   return (
-    <div>
-      <Header />
-      Home
-      <PostList />
-    </div>
-  )
-}
+    <Layout>
+      {/* <Header /> */}
+      <LikeList/>
+      <Footer />
+    </Layout>
+  );
+};
 
-export default Home
+export default Home;
+
+const Layout = styled.div`
+  background-color: #f8f9fa;
+`;

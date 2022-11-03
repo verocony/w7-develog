@@ -125,7 +125,6 @@ export const userSlice = createSlice({
       delCookie("userName")
       delCookie("userImg")
       delCookie("intro")
-
       state.loading = false
       state.userInfo = null
       state.userToken = null

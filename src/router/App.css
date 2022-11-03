@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'Fira Mono', monospace;
+  src: url("../components/assets/fonts/FiraMono-Regular.woff");
+}
+
+@font-face {
+  font-family: 'Noto Sans KR', sans-serif;
+  src: url("../components/assets/fonts/NotoSans-Medium.woff");
+}

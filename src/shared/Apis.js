@@ -28,14 +28,11 @@ const file = axios.create({
   baseURL: process.env.REACT_APP_URL,
   headers: {
     enctype: "multipart/form-data",
-    // "content-type": "application/json;charset=UTF-8",
-    accept: "application/json",
-    Access_Token: `${cookies.get("Access_Token")}`,
+    Access_Token: `Bearer ${cookies.get("token")}`,
   },
   withCredentials: true,
 })
 
-// 예시
 export const Apis = {
   //로그인
   loginAX: (loginInfo) => noToken.post(`/team01/member/login`, loginInfo),
@@ -53,17 +50,25 @@ export const Apis = {
   deletePostAX: (postId) => token.delete(`/team/01/post/${postId}`),
   //게시글 좋아요
   likePostAX: (postId) => token.get(`/team01/likes/${postId}`),
-  //게시글 전체 조회(좋아요순)
-  getLikePostAX: () => noToken.get(`/team01/getAllPostByLike`),
-  //게시글 전체 조회(최신순)
-  getTimePostAX: () => noToken.get(`/team01/getAllPostByTime`),
-  // 게시글 상세 조회
-  getDetailAX: (postId) => noToken.get(`/team01/getPost/${postId}`),
+
+  //게시글 전체 조회 - 좋아요순
+  getPostLikeAX: () => noToken.get(`/team01/getAllPostByLike`),
+  //게시글 전체 조회 - 시간순
+  getPostTimeAX: () => noToken.get(`/team01/getAllPostByTime`),
+  //게시글 상세 조회
+  getDetailAX: (postId) => token.get(`/team01/getPost/${postId}`),
 
   //댓글 작성
   postCmtAX: (commentId) => token.post(`/team01/comment/${commentId}`),
   //댓글 삭제
   deleteCmtAX: (commentId) => token.post(`/team01/comment/${commentId}`),
+
+  //마이페이지 조회
+  getMyPageAX: (userId) => noToken.get(`/team01/getMyPage?id=${userId}`),
+  //마이페이지 작성자 소개 수정
+  postMyPageAX: (payload) => token.post(`team01/mypage/intro`, payload),
+  //마이페이지 이미지 수정
+  postMyImgAX: (payload) => token.post(`/team01/mypage/img`, payload),
 
   //검색
   getSearchAX: (keyword) => noToken.get(`/team01/search/?content=${keyword}`),

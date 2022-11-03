@@ -3,6 +3,8 @@ import user from "../modules/userSlice"
 import post from "../modules/postSlice"
 import list from "../modules/listSlice"
 import cmt from "../modules/cmtSlice"
+import posts from "../modules/postSilice2"
+import mylist from "../modules/mypageSlice"
 import search from "../modules/searchSlice"
 import posts from "../modules/postSlice2"
 
@@ -14,6 +16,9 @@ const store = configureStore({
 
     // 작성용
     posts,
+
+    //마이페이지
+    mylist,
 
     // 게시글 상세조회, 삭제
     post,
