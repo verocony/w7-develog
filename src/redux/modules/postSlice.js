@@ -2,7 +2,7 @@ import { createSlice, current } from "@reduxjs/toolkit"
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { createAction } from "redux-actions"
 import Apis from "../../shared/Apis"
-import { useNavigate } from "react-router-dom"
+// import { useNavigate } from "react-router-dom"
 import { getCookie } from "../../shared/Cookie"
 
 //  초기값

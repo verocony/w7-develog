@@ -1,6 +1,6 @@
 import React from "react"
 import { Route, Routes, BrowserRouter } from "react-router-dom"
-import MyPage from "../pages/MyPage"
+import MyPage from "../pages/Mypage"
 import TimeList from "../components/features/TimeList"
 import Editor from "../pages/Editor"
 import Home from "../pages/Home"
