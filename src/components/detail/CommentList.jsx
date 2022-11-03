@@ -6,10 +6,12 @@ const CommentList = ({commentsList}) => {
     console.log("commentsList : ", commentsList);
     return (
         <CommentListWrap>
-            {commentsList.responseDto && commentsList.responseDto.map((comment) => (
-                <CommentCard key={comment.commentId} comment={comment} />
+            {commentsList && commentsList.map((comment) => (
+                <CommentCard key={comment.id} comment={comment} />
             ))}
         </CommentListWrap>
+
+
     )
 };
 

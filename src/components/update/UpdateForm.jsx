@@ -1,10 +1,10 @@
 import React from "react";
-import { __getPostDetail } from "../../redux/modules/postSlice";
+import { __getPostDetail, __updatePost } from "../../redux/modules/postSlice";
 import UpdateContent from "./UpdateContent";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import {useNavigate, useParams} from 'react-router-dom';
-import instance from "../../shared/Apis";
+import Apis from "../../shared/Apis";
 import styled from "styled-components";
 import { getCookie } from "../../shared/Cookie";
 import Button from "../elements/Button";
@@ -13,7 +13,11 @@ const UpdateForm = () => {
 
     const dispatch = useDispatch();
     const postId = useParams().postId;
-    const postDetail = useSelector((state) => state.postSlice.postDetail);
+    console.log('postId', postId)
+    const postDetail = useSelector((state) => state.post.post);
+    
+    
+
 
     useEffect(() => {
         dispatch(__getPostDetail(postId));
@@ -24,104 +28,40 @@ const UpdateForm = () => {
     // 뒤로가기
     const navigate = useNavigate();
     const goBack = () => {
-        navigate(-1);
+        // window.history.go(-1);
+        navigate(-1)
     }
 
-    // 이미지 업로드 상태관리
     const [postInput, setPostInput] = useState({
-        title:"",
-        content:"",
-        // postContent:"",
+        postContent:"",
     });
 
-    const [tagList, setTagList] = useState(postDetail.tags);
 
     const onClickUpdatePost = async(event) => {
         event.preventDefault();
         if (
-            postInput.title === '' || postInput.content === ''
+            postInput.postContent === ''
         ) {
-            postInput.title === '' && console.log("title 입력");
-      postInput.content === '' && console.log("content 입력");
+
+      postInput.postContent === '' && console.log("content 입력");
         } else {
-            console.log('서버로 데이터 전송!');
+            const obj = {id:postId, content:postInput, tag:postDetail.tag}
+            dispatch(__updatePost(obj))
+            console.log('서버로 데이터 전송!', postInput, postId);
+            window.alert('게시글이 수정되었습니다.')
+            navigate(`/post/${postId}`)
+            //  const navigate = useNavigate();
+            //  navigate(`/post/${response.data.id}`, {replace: true})
 
-            try {
-                const UpdateResponse = await instance
-                .put(`/team/01/post/${postId}`, {
-                    "title":String(postInput.title),
-                    "content":String(postInput.content),
-                    "tags":tagList,
-                },{
-                headers: {
-                    // Access_Token: `Bearer ${getCookie("token")}`
-                    Access_Token: 'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhMTIzIiwiZXhwIjoxNjY3MzA2OTUxLCJpYXQiOjE2NjczMDUxNTF9.zACVr8rx3qMCCfagzc_paxgDFEACsxhGpzxVoUOmrCU',
-                  }
-}
-                );
-                navigate(`/post/${UpdateResponse.data.data.id}
-                `, {replace: true});
-            } catch(error) {
-                console.log(error);
-            }
-// const onClickUpdatePost = async(event) => {
-//     const formData = new FormData()
-//     event.preventDerault();
-//     if (imgFile === "") {
-//         FormData.append("file", null)
-//     } else {
-//         FormData.append("file", imgFile)
-//     }
-
-   
+    
 
 
-// }
-            //게시글 UPDATE
-// const modifyPostDB = (postId = null, post = {}) => {
-//     const Token = getCookie('Access_Token');
-  
-//     const _post = {
-//       ...initialPost,
-//       contents: post.contents,
-//       imageUrl: post.file,
-//     };
-  
-//     return async function (dispatch, getState, { history }) {
-//       const form = new FormData();
-//       form.append("file", post.file);
-//       form.append(
-//         "requestDto",
-//         new Blob([JSON.stringify({ contents: post.contents })], {
-//           type: "application/json",
-//         })
-//       );
-  
-//       await axios({
-//         method: "put",
-//         url: `http://13.124.136.171/api/posts/modify/${postId}`,
-//         data: form,
-//         headers: {
-//           "Content-Type": "multipart/form-data",
-//           Authorization: `${token}`,
-//         },
-//       })
-//         .then((response) => {
-//           console.log(response, "게시글 수정 성공");
-//           dispatch(editPost(_post));
-//           history.replace("/postList");
-//         })
-//         .catch((err) => {
-//           console.log(err, "수정 실패");
-//         });
-//     };
-//   };
 
             // 초기화
-            setTagList([]);
+
             setPostInput({
-                title:'',
-                content:'',
+                // postTitle:'',
+                postContent:'',
             });
         }
     }
@@ -129,10 +69,11 @@ const UpdateForm = () => {
 
     return (
         <UpdateFormWrap>
-            <div>
+
+                <UpdateLeft>
                 <h3>포스트 수정하기</h3>
                 <UpdateImageWrap>
-                <PreviewImage src={__getPostDetail.imgUrl} alt='preview' />
+                <PreviewImage src={postDetail.postImg} alt='preview' />
                 </UpdateImageWrap>
 
                 <UpdateContent 
@@ -141,26 +82,40 @@ const UpdateForm = () => {
                     postDetail = {postDetail}
                     />
                 <UpdateTagWrap>
-                    <input  
-                        type="text"
-                        placeholder="태그 수정"
-                        />
+                    <div>{postDetail.tag}</div>                    
+              
+                       
                 <UpdateTags>
-                    {
-                        tagList && tagList.map((tag,index) => {
-                            <span key={tag+index} id={tag} >{tag}</span>
-                        })
-                    }
+                  <div> {postDetail.tag
+                        // postDetail.tag && postDetail.tag.map((tag,index) => {
+                        //     <span key={tag+index} id={tag} >{tag}</span>
+                        // })
+
+                    }</div> 
 
                 </UpdateTags>
                 </UpdateTagWrap>
+                </UpdateLeft>
+                {/* update_left */}
+                <UpdateRight>
+                    <h3>공개 설정</h3>
+                    <PrivateBtns>
+                        <button>전체 공개</button>
+                        <button style={{color:'#12b886', border:'1px solid #12b886'}}>비공개</button>
+                    </PrivateBtns>
+                    <h3>URL 설정</h3>
+                    <UpdateInput> /@team01/develog</UpdateInput>
+                    <h3>시리즈 설정</h3>
+                    <UpdateInput style={{color:'#12b886', height:'48px'}}>
+                    <p> 시리즈에 추가하기</p></UpdateInput>
                 <UpdateBtns>
-                    <Button  onClick={goBack} >취소</Button>
-                    <Button  onClick={onClickUpdatePost} >수정하기</Button>
+                    <button  onClick={goBack} style={{background:'transparent', color:'#12B886'}}>취소</button>
+                    <button  onClick={onClickUpdatePost} >수정하기</button>
 
                 </UpdateBtns>
-                
-            </div>
+                </UpdateRight>
+                {/* update_right */}
+
         </UpdateFormWrap>
     );
 
@@ -173,16 +128,49 @@ const UpdateFormWrap = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 400px;
-    height: 400px;
-    padding: 20px;
+    width: 768px;
+    height: 437px;
+    padding: 10px 0;
     margin: 0 auto;
-    background-color: moccasin;
+    overflow: hidden;
+    transform: translateY(50%);
 `;
+
+const UpdateLeft = styled.div`
+    flex: 1;
+    margin-right: 10px;
+    padding-right: 20px;
+    border-right: 1px solid #ddd;
+`
+const UpdateRight = styled.div`
+    flex: 1;
+    margin-left: 10px;
+    padding-left: 10px;
+    position: relative;
+    height: 448px;
+`
 
 const UpdateBtns = styled.div`
     display: flex;
     justify-content: end;
+    gap: 10px;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    button {
+        height: 40px;
+        padding: 0 18px;
+        font-size: 16px;
+        font-weight: 700;
+        background-color: #12b886;
+        border-radius:4px;
+        color: #fff; 
+        cursor: pointer;
+        outline: none;
+        border: none;
+        
+   }
 `;
 
 const UpdateImageWrap = styled.div`
@@ -192,7 +180,8 @@ position: relative;
     align-items: center;
     justify-content: center;
     height: 200px;
-    background-color: palegreen;
+    width: 351px;
+    margin-right: 10px;
     text-align: center;
     `;
 
@@ -222,9 +211,44 @@ const UpdateTags = styled.div`
         display: inline-block;
         height: 20px;
         color: aquamarine;
-        background-color: thistle;
         padding: 10px;
         margin:10px;
+    }
+`
 
+const PrivateBtns = styled.div`
+display: flex;
+    justify-content: space-between;
+    gap: 10px;
+
+    button {
+        flex: 1;
+        height: 48px;
+        padding: 0 18px;
+        font-size: 16px;
+        font-weight: 700;
+        color: #868E96;
+        border-radius:4px;
+        background-color: #fff; 
+        cursor: pointer;
+        outline: none;
+        box-shadow: rgba(0,0,0,0.03);
+        border: none;        
+   }
+`
+const UpdateInput = styled.div`
+    width: 100%;
+    height: 40px;
+    background-color: #fff;
+    box-shadow: rgba(0,0,0,0.03);
+    line-height: 40px;
+    border-radius: 4px;
+    padding: 0 5px;
+
+    p {
+        line-height: 48px;
+        font-weight: 700;
+        color: #20c997;
+        text-align: center;
     }
 `

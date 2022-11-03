@@ -1,62 +1,23 @@
-// 민지
 import { createSlice, current } from "@reduxjs/toolkit"
 import { createAsyncThunk } from "@reduxjs/toolkit"
+import { useNavigate,  } from "react-router-dom";
 import { createAction } from "redux-actions";
 import Apis from "../../shared/Apis";
 import { getCookie } from "../../shared/Cookie";
 
-// const EDIT_POST = "EDIT_POST";
 
-// const editPost = createAction(EDIT_POST, (postId, post) => ({
-//   postId,
-//   post
-// }));
 
 //  초기값
 const initialState = {
     isLoading: false,
     error: null,
-    post: [],
-    postDetail : {},
+    post: {},
+    // postDetail : {},
     // heartCount: null,
     // heartPush: null,
 }
 
-// const initialPost = {
-//   postId : 1,
-//   postImg : "",
-//   postTitle : "",
-//   postContent : "",
-//   tag: [],
-//   countTime : "",
-//   modifiyPost : "",
-//   countDay : "",
-//   userImg : "",
-//   userName : "",
-//  countLike : 12,
-//   countCmt : 0,
-// };
 
-// 게시글 불러오기
-
-
-// 게시글 작성
-// export const addPost = createAsyncThunk(
-//   "contents/insert",
-//   async (payload, thunkAPI) => {
-//     Apis.filePostAX(payload)
-//     try {
-//       console.log("PostAX response").then((response) => {
-//         console.log("response", response.data)
-//         return thunkAPI.fulfillWithValue(payload)
-//       })
-//     } catch (error) {
-//       console.log(error)
-//       alert(error.response.data.message)
-//       return thunkAPI.rejectWithValue(error)
-//     }
-//   }
-// )
 
 // 게시글 상세 조회
 export const __getPostDetail = createAsyncThunk(
@@ -68,7 +29,7 @@ export const __getPostDetail = createAsyncThunk(
       console.log("getDetailAX response")
       // .then((response) => {
       //   console.log("response", response.data)
-        return thunkAPI.fulfillWithValue(response.data)
+        return thunkAPI.fulfillWithValue(response.data.data)
       // })
     } 
     catch (error) {
@@ -117,48 +78,32 @@ export const __deletePost = createAsyncThunk(
 )
 
 // 게시글 수정
-// const __editPost = (postId = null, post = {}) => {
-//   const Token = getCookie('Access_Token')
 
-//   const _post = {
-//     ...initialPost,
-//     contents: post.contents,
-//     imageUrl: post.file,
-//   };
+export const __updatePost = createAsyncThunk(
+  "detail/__updatePost",
+  async(payload, thunkAPI) => {
+    console.log(payload)
+    
+    try {
+      const response = await Apis.putPostAX(payload)
+      
+        // const navigate = useNavigate();
+        // navigate(`/post/${response.data.id}`, {replace: true})
+      
+        console.log(response, "게시글 수정 성공")
+        return thunkAPI.fulfillWithValue(payload)
 
-//   return async function (dispatch, getState, { history }) {
-//     const form = new FormData();
-//     form.append("file", post.file);
-//     form.append(
-//       "requestDto",
-//       new Blob([JSON.stringify({ contents: post.contents })], {
-//         type: "application/json",
-//       })
-//     );
-
-//     await axios({
-//       method: "put",
-//       url: `http://13.124.136.171/api/posts/modify/${postId}`,
-//       data: form,
-//       headers: {
-//         "Content-Type": "multipart/form-data",
-//         Authorization: `${token}`,
-//       },
-//     })
-//       .then((response) => {
-//         console.log(response, "게시글 수정 성공");
-//         dispatch(editPost(_post));
-//         history.replace("/postList");
-//       })
-//       .catch((err) => {
-//         console.log(err, "수정 실패");
-//       });
-//   };
-// };
+      }
+   catch (error) {
+      console.log(error, "수정 실패");
+      return thunkAPI.rejectWithValue(error)
+  }
+  }
+)
 
 
 const postSlice = createSlice({
-  name: "postSlice",
+  name: "post",
   initialState,
   reducers: {},
   extraReducers: {
@@ -181,8 +126,8 @@ const postSlice = createSlice({
     },
     [__getPostDetail.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log(action.postId.data);
-      state.postDetail = action.postId.data;
+      console.log("포스트 이미지 나와라~!~!",action.payload.postImg.length === 0);
+      state.post = action.payload;
     },
     [__getPostDetail.rejected]: (state, action) => {
       state.isLoading = false;
@@ -207,7 +152,20 @@ const postSlice = createSlice({
     //   state.error = action.payload;
     // },
 
-    
+    // 게시글 수정
+    [__updatePost.pending]: (state) => {
+      state.isLoading = true;
+    },
+    [__updatePost.fulfilled]: (state, action) => {
+      state.isLoading = false;
+      console.log(action.id);
+      state.post = action.payload;
+    },
+    [__updatePost.rejected]: (state, action) => {
+      state.isLoading = false;
+      state.error = action.postId;
+    },
+
 
     //  게시글 삭제
     [__deletePost.pending]: (state) => {
@@ -215,8 +173,6 @@ const postSlice = createSlice({
     },
     [__deletePost.fulfilled]: (state, action) => {
       state.isLoading = false;
-      console.log("post delete state post : ", state.post);
-      console.log("post delete action. : ", action.id);
       state.post = state.post.filter(
         (postcard) => 
           postcard.id !== action.id.data
@@ -232,153 +188,4 @@ const postSlice = createSlice({
 
 
 export default postSlice.reducer;
-
-// import { createAction, handleActions } from "redux-actions";
-// import { produce } from "immer";
-// import Apis from "../../shared/Apis";
-
-// // import axios from "axios"
-// const GET_POST = "SET_POST";
-// const ADD_POST = "ADD_POST";
-// const EDIT_POST = "EDIT_POST";
-// const DELETE_POST = "DELETE_POST";
-
-// const getPost = createAction(GET_POST, (postList) => ({
-//   postList,
-// }));
-// const addPost = createAction(ADD_POST, (post) => ({
-//   post,
-// }));
-// const editPost = createAction(EDIT_POST, (post, postId) => ({
-//   post,
-//   postId,
-// }));
-// const deletePost = createAction(DELETE_POST, (postId) => ({
-//   postId,
-// }));
-
-// const initialState = {
-//   list: [],
-// };
-
-// const getPostDB = (category) => {
-//   return function (dispatch, getState, { history }) {
-//     if (category) {
-//       Apis.getPostAX(`/post?category=${category}`)
-//         .then((response) => {
-//           console.log("44444444", response.data);
-//           dispatch(getPost(response.data.posts));
-//         })
-//         .catch((error) => {
-//           console.error(error);
-//         });
-//     } else {
-//      Apis.getPostAX("/post")
-//         .then((response) => {
-//           dispatch(getPost(response.data.posts));
-//         })
-//         .catch((error) => {
-//           console.error(error);
-//         });
-//     }
-//   };
-// };
-
-
-// const getOnePostDB = (postId) => {
-//   return function (dispatch, getState, { history }) {
-//     Apis.getDetailAX(postId)
-//       .then((response) => {
-//         dispatch(getPost([response.data.post]));
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   };
-// };
-
-// const addPostDB = (post) => {
-//   return function (dispatch, getState, { history }) {
-//     Apis.filePostAX
-//       .then((response) => {
-//         dispatch(addPost(post));
-//         history.push("/");
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   };
-// };
-
-// const editPostDB = (post, postId) => {
-//   return function (dispatch, getState, { history }) {
-//     Apis.putPostAX
-//       .then((response) => {
-//         dispatch(editPost(post, postId));
-//         history.push("/");
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   };
-// };
-
-// const removePostDB = (postId) => {
-//   return function (dispatch, getState, { history }) {
-//     Apis.deletePostAX
-//       .then((response) => {
-//         dispatch(deletePost(postId));
-//         history.push("/");
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   };
-// };
-
-// export default handleActions(
-//   {
-//     [GET_POST]: (state, action) =>
-//       produce(state, (draft) => {
-//         draft.list = action.payload.postList;
-//       }),
-//     [ADD_POST]: (state, action) =>
-//       produce(state, (draft) => {
-//         draft.list.unshift(action.payload.post);
-//       }),
-//     [EDIT_POST]: (state, action) =>
-//       produce(state, (draft) => {
-//         let idx = draft.list.findIndex(
-//           (e) => e.postId === action.payload.postId
-//         );
-//         draft.list[idx] = { ...draft.list[idx], ...action.payload.post };
-//       }),
-
-//     [DELETE_POST]: (state, action) =>
-//       produce(state, (draft) => {
-//         console.log('delete_post');
-//         draft.list = draft.list.filter(
-//           (e) => e.postId !== action.payload.postId
-//         );
-//       }),
-//   },
-//   initialState
-// );
-
-// const actionCreators = {
-//   getPost,
-//   editPost,
-//   getOnePostDB,
-//   getPostDB,
-//   addPostDB,
-//   removePostDB,
-//   editPostDB,
-// };
-// export { actionCreators };
-
-
-
-// 액션크리에이터는 컴포넌트에서 사용하기 위해 export 하고
-export const {} = postSlice.actions
-// reducer 는 configStore에 등록하기 위해 export default 합니다.
 

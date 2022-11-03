@@ -89,7 +89,7 @@ const Editor = () => {
     let obj = {
       postTitle: postInput.title,
       postContent: postInput.contents,
-      tag: ["tag"],
+      postTag: ["tag"],
     }
     //console.log(JSON.stringify(obj))
 

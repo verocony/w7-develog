@@ -16,7 +16,7 @@ const token = axios.create({
   baseURL: process.env.REACT_APP_URL,
   headers: {
     accept: "application/json",
-    Access_Token: `Bearer ${cookies.get("token")}`,
+    Access_Token: `${cookies.get("Access_Token")}`,
     "Access-Control-Allow-Origin": "*",
   },
   withCredentials: true,
@@ -27,7 +27,7 @@ const file = axios.create({
   headers: {
     enctype: "multipart/form-data",
 
-    Access_Token: `Bearer ${cookies.get("token")}`,
+    Access_Token: `${cookies.get("Access_Token")}`,
     // Access_Token: `eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJrZWg1MTY0IiwiZXhwIjoxNjY3MTM2MDQ2LCJpYXQiOjE2NjcxMzQyNDZ9.JBTAfVvxd8Fj7jn5gEUakygaEUgJdG0Wb-KjS_Y6CLw`,
   },
   withCredentials: true,
@@ -76,9 +76,9 @@ export const Apis = {
   //게시글 작성
   filePostAX: (payload) => file.post(`/team01/post`, payload),
   //게시글 수정
-  putPostAX: (postId) => file.put(`/team/01/post/${postId}`, postId),
+  putPostAX: (payload) => file.put(`/team01/post/${payload.id}`, payload.content),
   //게시글 삭제
-  deletePostAX: (id) => token.delete(`/team/01/post/${id}`),
+  deletePostAX: (id) => token.delete(`/team01/post/${id}`),
   //게시글 좋아요
   likePostAX: (id) => token.get(`/team01/likes/${id}`),
   //게시글 전체 조회
@@ -87,9 +87,9 @@ export const Apis = {
   getDetailAX: (postId) => token.get(`/team01/getPost/${postId}`),
 
   //댓글 작성
-  postCmtAX: (id) => token.post(`/team01/comment/${id}`),
+  postCmtAX: (payload) => token.post(`/team01/comment/${payload.id}`, payload.comment),
   //댓글 삭제
-  deleteCmtAX: (id) => token.post(`/team01/comment/${id}`),
+  deleteCmtAX: (id) => token.delete(`/team01/comment/${id}`),
 }
 
 export default Apis

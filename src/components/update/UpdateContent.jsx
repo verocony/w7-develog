@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { __getPostDetail } from "../../redux/modules/postSlice";
+import {H4} from "../elements/Text"
 
 
 const UpdateContent = ({postInput, setPostInput, postDetail}) => {
@@ -16,18 +17,21 @@ const UpdateContent = ({postInput, setPostInput, postDetail}) => {
     
     return (
         <UpdateContentWrap>
-            <input 
-                name="title"
-                value={postInput.title}
+            {/* <input 
+                name="postTitle"
+                value={postInput.postTitle}
                 onChange={onChangePostContent}
-                placeholder={postDetail.title}
-            />
+                placeholder={postDetail.postTitle}
+            /> */}
+            <div>
+            <p>{postDetail.postTitle}</p></div>
             <textarea
-                name="content"
-                value={postInput.content}
+                name="postContent"
+                value={postInput.postContent}
                 onChange={onChangePostContent}
-                placeholder={postDetail.content}
+                placeholder={postDetail.postContent}
                 ></textarea>
+                <div>{postDetail.tag}</div>
         </UpdateContentWrap>
 
     )
@@ -36,15 +40,41 @@ const UpdateContent = ({postInput, setPostInput, postDetail}) => {
 export default UpdateContent;
 
 const UpdateContentWrap = styled.div`
-    padding: 20px;
+    width: 351px;
+    height: 150px;
 
-    input, textarea {
-        width: 100%;
-        border: 1px solid black;
-        background-color: antiquewhite;
+    /* div { 
+    
+    } */
+    
+    p {
+    font-size: 18px;
+    font-weight: 500;
+    height: 40px;
+    width: 100%;
+    box-shadow: rgba(0,0,0,0.03);
+    border: 1px solid rgba(0,0,0,0.03);
+    background-color: #fff;
     }
+   
+    
     textarea {
-        height: 50px;
-        border: 2px solid red;
+        width: 100%;
+        height: 120px;
+        color: #212529;
+    background-color: #fff;
+    box-shadow: rgba(0,0,0,0.03);
+    font-size: 18px;
+    outline: none;
+    border: none;
+
     }
 `
+
+// const UpdateTitle = styled.div`
+//     height: 48px;
+//     font-size: 18px;
+//     line-height: 20px;
+//     font-weight: 20px;
+// `
+    
